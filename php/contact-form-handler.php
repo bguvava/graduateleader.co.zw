@@ -26,7 +26,7 @@ header('Access-Control-Allow-Methods: POST');
 
 // Configuration
 define('RECIPIENT_EMAIL', 'info@graduateleader.co.zw');
-define('FROM_EMAIL', 'noreply@graduateleader.co.zw');
+define('FROM_EMAIL', 'info@graduateleader.co.zw');  // Changed from noreply@ to info@ (must use existing email account)
 define('FROM_NAME', 'SGLD Contact Form');
 
 // Spam keyword patterns (case-insensitive)
