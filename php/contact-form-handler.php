@@ -1,10 +1,13 @@
 <?php
-// SGLD Contact Form Handler
-// Handles General, Enrolment, and Corporate enquiry forms
-// Includes spam protection and email delivery
+/* ========================================
+   SGLD CONTACT FORM HANDLER
+   Handles General, Enrolment, and Corporate enquiry forms
+   ======================================== */
 
 // Set headers for JSON response
 header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: POST');
 
 // Configuration
 define('RECIPIENT_EMAIL', 'info@graduateleader.co.zw');
@@ -21,25 +24,11 @@ $spamKeywords = [
     'mobile apps development', 'website development'
 ];
 
-// Response helper function
-function sendResponse($success, $message) {
-    echo json_encode(['success' => $success, 'message' => $message]);
-    exit;
-}
-
-// Validate required field
-function validateRequired($field, $label) {
-    if (empty($field)) {
-        sendResponse(false, "$label is required.");
-    }
-}
-
-// Validate email format
-function validateEmail($email) {
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        sendResponse(false, 'Invalid email address.');
-    }
-}
+// Initialize response
+$response = [
+    'success' => false,
+    'message' => ''
+];
 
 // Check for spam patterns
 function isSpam($text, $spamKeywords) {
@@ -52,17 +41,11 @@ function isSpam($text, $spamKeywords) {
     return false;
 }
 
-// Honeypot check
-function checkHoneypot($honeypotField) {
-    if (!empty($honeypotField)) {
-        // Bot filled honeypot field - reject silently
-        sendResponse(true, 'Thank you for your message. We will be in touch soon.');
-    }
-}
-
 // Only accept POST requests
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    sendResponse(false, 'Invalid request method.');
+    $response['message'] = 'Invalid request method.';
+    echo json_encode($response);
+    exit;
 }
 
 // Get form type
@@ -73,138 +56,352 @@ $honeypotFieldName = 'website';
 if ($formType === 'enrolment') $honeypotFieldName = 'website2';
 if ($formType === 'corporate') $honeypotFieldName = 'website3';
 
-$honeypot = isset($_POST[$honeypotFieldName]) ? $_POST[$honeypotFieldName] : '';
-checkHoneypot($honeypot);
+// Honeypot check - if filled, it's a bot
+if (!empty($_POST[$honeypotFieldName])) {
+    $response['success'] = true;
+    $response['message'] = 'Thank you for your message. We will be in touch soon.';
+    echo json_encode($response);
+    exit;
+}
+
+// Initialize variables
+$name = $email = $phone = $subject = $message = '';
+$emailSubject = $emailBody = '';
 
 // Process based on form type
 switch ($formType) {
     case 'general':
         // Get and sanitize fields
-        $name = trim(strip_tags($_POST['name'] ?? ''));
-        $email = trim(strip_tags($_POST['email'] ?? ''));
-        $phone = trim(strip_tags($_POST['phone'] ?? ''));
-        $subject = trim(strip_tags($_POST['subject'] ?? ''));
-        $message = trim(strip_tags($_POST['message'] ?? ''));
+        $name = isset($_POST['name']) ? trim(strip_tags($_POST['name'])) : '';
+        $email = isset($_POST['email']) ? trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL)) : '';
+        $phone = isset($_POST['phone']) ? trim(strip_tags($_POST['phone'])) : '';
+        $subject = isset($_POST['subject']) ? trim(strip_tags($_POST['subject'])) : '';
+        $message = isset($_POST['message']) ? trim(strip_tags($_POST['message'])) : '';
 
         // Validation
-        validateRequired($name, 'Name');
-        validateRequired($email, 'Email');
-        validateRequired($subject, 'Subject');
-        validateRequired($message, 'Message');
-        validateEmail($email);
+        $errors = [];
+        if (empty($name) || strlen($name) < 2) {
+            $errors[] = 'Please provide a valid name.';
+        }
+        if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $errors[] = 'Please provide a valid email address.';
+        }
+        if (empty($subject)) {
+            $errors[] = 'Please provide a subject.';
+        }
+        if (empty($message) || strlen($message) < 10) {
+            $errors[] = 'Please provide a detailed message (minimum 10 characters).';
+        }
+
+        if (!empty($errors)) {
+            $response['message'] = implode(' ', $errors);
+            echo json_encode($response);
+            exit;
+        }
 
         // Spam check
         if (isSpam($subject . ' ' . $message, $spamKeywords)) {
-            // Silently reject spam but pretend success
-            sendResponse(true, 'Thank you for your message. We will be in touch soon.');
+            $response['success'] = true;
+            $response['message'] = 'Thank you for your message. We will be in touch soon.';
+            echo json_encode($response);
+            exit;
         }
 
         // Build email
-        $emailSubject = "SGLD General Enquiry: $subject";
-        $emailBody = "New General Enquiry from SGLD Website\n\n";
-        $emailBody .= "Name: $name\n";
-        $emailBody .= "Email: $email\n";
-        $emailBody .= "Phone: " . ($phone ?: 'Not provided') . "\n\n";
-        $emailBody .= "Subject: $subject\n\n";
-        $emailBody .= "Message:\n$message\n\n";
-        $emailBody .= "---\n";
-        $emailBody .= "Sent from: graduateleader.co.zw contact form\n";
-        $emailBody .= "Time: " . date('Y-m-d H:i:s') . "\n";
+        $emailSubject = "SGLD General Enquiry: " . $subject;
+        $emailBody = "
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; background: #f5f9fc; }
+        .header { background: linear-gradient(135deg, #1B2A4A 0%, #F5A623 100%); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; }
+        .content { background: white; padding: 30px; border-radius: 0 0 10px 10px; }
+        .field { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #eee; }
+        .label { font-weight: bold; color: #1B2A4A; margin-bottom: 5px; }
+        .value { color: #4A4A4A; }
+        .footer { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 2px solid #F5A623; color: #7A8A99; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class='container'>
+        <div class='header'>
+            <h1 style='margin: 0;'>New General Enquiry</h1>
+            <p style='margin: 10px 0 0;'>School of Graduate Leadership Development</p>
+        </div>
+        <div class='content'>
+            <div class='field'>
+                <div class='label'>Name:</div>
+                <div class='value'>{$name}</div>
+            </div>
+            <div class='field'>
+                <div class='label'>Email:</div>
+                <div class='value'>{$email}</div>
+            </div>
+            <div class='field'>
+                <div class='label'>Phone:</div>
+                <div class='value'>" . ($phone ?: 'Not provided') . "</div>
+            </div>
+            <div class='field'>
+                <div class='label'>Subject:</div>
+                <div class='value'>{$subject}</div>
+            </div>
+            <div class='field' style='border-bottom: none;'>
+                <div class='label'>Message:</div>
+                <div class='value'>" . nl2br(htmlspecialchars($message)) . "</div>
+            </div>
+            <div class='footer'>
+                <p>This email was sent from the SGLD website contact form.</p>
+                <p><strong>Submitted:</strong> " . date('Y-m-d H:i:s') . "</p>
+                <p>Website: <a href='https://graduateleader.co.zw'>graduateleader.co.zw</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+";
         break;
 
     case 'enrolment':
         // Get and sanitize fields
-        $name = trim(strip_tags($_POST['name'] ?? ''));
-        $email = trim(strip_tags($_POST['email'] ?? ''));
-        $phone = trim(strip_tags($_POST['phone'] ?? ''));
-        $qualification = trim(strip_tags($_POST['qualification'] ?? ''));
-        $programme = trim(strip_tags($_POST['programme'] ?? ''));
-        $delivery_mode = trim(strip_tags($_POST['delivery_mode'] ?? ''));
-        $start_date = trim(strip_tags($_POST['start_date'] ?? ''));
-        $comments = trim(strip_tags($_POST['comments'] ?? ''));
+        $name = isset($_POST['name']) ? trim(strip_tags($_POST['name'])) : '';
+        $email = isset($_POST['email']) ? trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL)) : '';
+        $phone = isset($_POST['phone']) ? trim(strip_tags($_POST['phone'])) : '';
+        $qualification = isset($_POST['qualification']) ? trim(strip_tags($_POST['qualification'])) : '';
+        $programme = isset($_POST['programme']) ? trim(strip_tags($_POST['programme'])) : '';
+        $delivery_mode = isset($_POST['delivery_mode']) ? trim(strip_tags($_POST['delivery_mode'])) : '';
+        $start_date = isset($_POST['start_date']) ? trim(strip_tags($_POST['start_date'])) : '';
+        $comments = isset($_POST['comments']) ? trim(strip_tags($_POST['comments'])) : '';
 
         // Validation
-        validateRequired($name, 'Name');
-        validateRequired($email, 'Email');
-        validateRequired($phone, 'Phone');
-        validateRequired($programme, 'Programme');
-        validateEmail($email);
+        $errors = [];
+        if (empty($name) || strlen($name) < 2) {
+            $errors[] = 'Please provide a valid name.';
+        }
+        if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $errors[] = 'Please provide a valid email address.';
+        }
+        if (empty($phone)) {
+            $errors[] = 'Please provide a phone number.';
+        }
+        if (empty($programme)) {
+            $errors[] = 'Please select a programme.';
+        }
+
+        if (!empty($errors)) {
+            $response['message'] = implode(' ', $errors);
+            echo json_encode($response);
+            exit;
+        }
 
         // Spam check
         if (isSpam($comments, $spamKeywords)) {
-            sendResponse(true, 'Thank you for your enrolment enquiry. We will be in touch soon.');
+            $response['success'] = true;
+            $response['message'] = 'Thank you for your enrolment enquiry. We will be in touch soon.';
+            echo json_encode($response);
+            exit;
         }
 
         // Build email
-        $emailSubject = "SGLD Enrolment Enquiry: $programme";
-        $emailBody = "New Programme Enrolment Enquiry from SGLD Website\n\n";
-        $emailBody .= "Name: $name\n";
-        $emailBody .= "Email: $email\n";
-        $emailBody .= "Phone: $phone\n";
-        $emailBody .= "Highest Qualification: " . ($qualification ?: 'Not provided') . "\n";
-        $emailBody .= "Programme of Interest: $programme\n";
-        $emailBody .= "Preferred Delivery Mode: " . ($delivery_mode ?: 'Not specified') . "\n";
-        $emailBody .= "Preferred Start Date: " . ($start_date ?: 'Not specified') . "\n\n";
-        $emailBody .= "Additional Comments:\n" . ($comments ?: 'None') . "\n\n";
-        $emailBody .= "---\n";
-        $emailBody .= "Sent from: graduateleader.co.zw enrolment form\n";
-        $emailBody .= "Time: " . date('Y-m-d H:i:s') . "\n";
+        $emailSubject = "SGLD Enrolment Enquiry: " . $programme;
+        $emailBody = "
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; background: #f5f9fc; }
+        .header { background: linear-gradient(135deg, #1B2A4A 0%, #F5A623 100%); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; }
+        .content { background: white; padding: 30px; border-radius: 0 0 10px 10px; }
+        .field { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #eee; }
+        .label { font-weight: bold; color: #1B2A4A; margin-bottom: 5px; }
+        .value { color: #4A4A4A; }
+        .footer { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 2px solid #F5A623; color: #7A8A99; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class='container'>
+        <div class='header'>
+            <h1 style='margin: 0;'>New Programme Enrolment Enquiry</h1>
+            <p style='margin: 10px 0 0;'>School of Graduate Leadership Development</p>
+        </div>
+        <div class='content'>
+            <div class='field'>
+                <div class='label'>Name:</div>
+                <div class='value'>{$name}</div>
+            </div>
+            <div class='field'>
+                <div class='label'>Email:</div>
+                <div class='value'>{$email}</div>
+            </div>
+            <div class='field'>
+                <div class='label'>Phone:</div>
+                <div class='value'>{$phone}</div>
+            </div>
+            <div class='field'>
+                <div class='label'>Highest Qualification:</div>
+                <div class='value'>" . ($qualification ?: 'Not provided') . "</div>
+            </div>
+            <div class='field'>
+                <div class='label'>Programme of Interest:</div>
+                <div class='value'><strong>{$programme}</strong></div>
+            </div>
+            <div class='field'>
+                <div class='label'>Preferred Delivery Mode:</div>
+                <div class='value'>" . ($delivery_mode ?: 'Not specified') . "</div>
+            </div>
+            <div class='field'>
+                <div class='label'>Preferred Start Date:</div>
+                <div class='value'>" . ($start_date ?: 'Not specified') . "</div>
+            </div>
+            <div class='field' style='border-bottom: none;'>
+                <div class='label'>Additional Comments:</div>
+                <div class='value'>" . ($comments ? nl2br(htmlspecialchars($comments)) : 'None') . "</div>
+            </div>
+            <div class='footer'>
+                <p>This email was sent from the SGLD website enrolment form.</p>
+                <p><strong>Submitted:</strong> " . date('Y-m-d H:i:s') . "</p>
+                <p>Website: <a href='https://graduateleader.co.zw'>graduateleader.co.zw</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+";
         break;
 
     case 'corporate':
         // Get and sanitize fields
-        $name = trim(strip_tags($_POST['name'] ?? ''));
-        $organisation = trim(strip_tags($_POST['organisation'] ?? ''));
-        $email = trim(strip_tags($_POST['email'] ?? ''));
-        $phone = trim(strip_tags($_POST['phone'] ?? ''));
-        $team_size = trim(strip_tags($_POST['team_size'] ?? ''));
-        $enquiry_type = trim(strip_tags($_POST['enquiry_type'] ?? ''));
-        $details = trim(strip_tags($_POST['details'] ?? ''));
+        $name = isset($_POST['name']) ? trim(strip_tags($_POST['name'])) : '';
+        $organisation = isset($_POST['organisation']) ? trim(strip_tags($_POST['organisation'])) : '';
+        $email = isset($_POST['email']) ? trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL)) : '';
+        $phone = isset($_POST['phone']) ? trim(strip_tags($_POST['phone'])) : '';
+        $team_size = isset($_POST['team_size']) ? trim(strip_tags($_POST['team_size'])) : '';
+        $enquiry_type = isset($_POST['enquiry_type']) ? trim(strip_tags($_POST['enquiry_type'])) : '';
+        $details = isset($_POST['details']) ? trim(strip_tags($_POST['details'])) : '';
 
         // Validation
-        validateRequired($name, 'Name');
-        validateRequired($organisation, 'Organisation');
-        validateRequired($email, 'Email');
-        validateRequired($enquiry_type, 'Enquiry type');
-        validateRequired($details, 'Details');
-        validateEmail($email);
+        $errors = [];
+        if (empty($name) || strlen($name) < 2) {
+            $errors[] = 'Please provide a valid name.';
+        }
+        if (empty($organisation)) {
+            $errors[] = 'Please provide your organisation name.';
+        }
+        if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $errors[] = 'Please provide a valid email address.';
+        }
+        if (empty($enquiry_type)) {
+            $errors[] = 'Please select an enquiry type.';
+        }
+        if (empty($details) || strlen($details) < 10) {
+            $errors[] = 'Please provide details about your enquiry (minimum 10 characters).';
+        }
+
+        if (!empty($errors)) {
+            $response['message'] = implode(' ', $errors);
+            echo json_encode($response);
+            exit;
+        }
 
         // Spam check
         if (isSpam($details, $spamKeywords)) {
-            sendResponse(true, 'Thank you for your corporate enquiry. We will be in touch soon.');
+            $response['success'] = true;
+            $response['message'] = 'Thank you for your corporate enquiry. We will be in touch soon.';
+            echo json_encode($response);
+            exit;
         }
 
         // Build email
-        $emailSubject = "SGLD Corporate Enquiry: $enquiry_type";
-        $emailBody = "New Corporate Enquiry from SGLD Website\n\n";
-        $emailBody .= "Name: $name\n";
-        $emailBody .= "Organisation: $organisation\n";
-        $emailBody .= "Email: $email\n";
-        $emailBody .= "Phone: " . ($phone ?: 'Not provided') . "\n";
-        $emailBody .= "Team Size: " . ($team_size ?: 'Not specified') . "\n";
-        $emailBody .= "Nature of Enquiry: $enquiry_type\n\n";
-        $emailBody .= "Details:\n$details\n\n";
-        $emailBody .= "---\n";
-        $emailBody .= "Sent from: graduateleader.co.zw corporate form\n";
-        $emailBody .= "Time: " . date('Y-m-d H:i:s') . "\n";
+        $emailSubject = "SGLD Corporate Enquiry: " . $enquiry_type;
+        $emailBody = "
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; background: #f5f9fc; }
+        .header { background: linear-gradient(135deg, #1B2A4A 0%, #F5A623 100%); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; }
+        .content { background: white; padding: 30px; border-radius: 0 0 10px 10px; }
+        .field { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #eee; }
+        .label { font-weight: bold; color: #1B2A4A; margin-bottom: 5px; }
+        .value { color: #4A4A4A; }
+        .footer { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 2px solid #F5A623; color: #7A8A99; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class='container'>
+        <div class='header'>
+            <h1 style='margin: 0;'>New Corporate Enquiry</h1>
+            <p style='margin: 10px 0 0;'>School of Graduate Leadership Development</p>
+        </div>
+        <div class='content'>
+            <div class='field'>
+                <div class='label'>Name:</div>
+                <div class='value'>{$name}</div>
+            </div>
+            <div class='field'>
+                <div class='label'>Organisation:</div>
+                <div class='value'><strong>{$organisation}</strong></div>
+            </div>
+            <div class='field'>
+                <div class='label'>Email:</div>
+                <div class='value'>{$email}</div>
+            </div>
+            <div class='field'>
+                <div class='label'>Phone:</div>
+                <div class='value'>" . ($phone ?: 'Not provided') . "</div>
+            </div>
+            <div class='field'>
+                <div class='label'>Team Size:</div>
+                <div class='value'>" . ($team_size ?: 'Not specified') . "</div>
+            </div>
+            <div class='field'>
+                <div class='label'>Nature of Enquiry:</div>
+                <div class='value'><strong>{$enquiry_type}</strong></div>
+            </div>
+            <div class='field' style='border-bottom: none;'>
+                <div class='label'>Details:</div>
+                <div class='value'>" . nl2br(htmlspecialchars($details)) . "</div>
+            </div>
+            <div class='footer'>
+                <p>This email was sent from the SGLD website corporate enquiry form.</p>
+                <p><strong>Submitted:</strong> " . date('Y-m-d H:i:s') . "</p>
+                <p>Website: <a href='https://graduateleader.co.zw'>graduateleader.co.zw</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+";
         break;
 
     default:
-        sendResponse(false, 'Invalid form type.');
+        $response['message'] = 'Invalid form type.';
+        echo json_encode($response);
+        exit;
 }
 
-// Send email
+// Email headers for HTML email
 $headers = [
+    'MIME-Version: 1.0',
+    'Content-type: text/html; charset=utf-8',
     'From: ' . FROM_NAME . ' <' . FROM_EMAIL . '>',
     'Reply-To: ' . $email,
-    'X-Mailer: PHP/' . phpversion(),
-    'Content-Type: text/plain; charset=UTF-8'
+    'X-Mailer: PHP/' . phpversion()
 ];
 
-$mailSent = mail(RECIPIENT_EMAIL, $emailSubject, $emailBody, implode("\r\n", $headers));
+// Send email
+$mail_sent = mail(RECIPIENT_EMAIL, $emailSubject, $emailBody, implode("\r\n", $headers));
 
-if ($mailSent) {
-    sendResponse(true, 'Thank you for contacting SGLD. We will respond within one business day.');
+if ($mail_sent) {
+    $response['success'] = true;
+    $response['message'] = 'Thank you for contacting SGLD. We will respond within one business day.';
 } else {
-    sendResponse(false, 'Sorry, there was an error sending your message. Please try again or contact us directly.');
+    $response['message'] = 'Sorry, there was an error sending your message. Please try again or contact us directly via phone or WhatsApp.';
 }
+
+echo json_encode($response);
+exit;
+?>
