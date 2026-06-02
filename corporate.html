@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Corporate Solutions | School of Graduate Leadership Development</title>
+  <meta name="description" content="SGLD's corporate training, human capital consultancy, and partnership solutions for organisations across Zimbabwe and Africa." />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+  <style>
+    .corp-hero { min-height:100vh; background:linear-gradient(135deg,var(--navy-dark) 0%,#1a3a6e 60%,var(--navy) 100%); display:flex;align-items:center;padding-top:80px;position:relative;overflow:hidden; }
+    .corp-hero::before { content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(245,166,35,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(245,166,35,0.04) 1px,transparent 1px);background-size:60px 60px; }
+    .corp-hero-content { position:relative;z-index:2; }
+    .packages-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:28px; }
+    @media(max-width:1024px){ .packages-grid{grid-template-columns:repeat(2,1fr);} }
+    @media(max-width:640px){ .packages-grid{grid-template-columns:1fr;} }
+    .package-card { background:var(--white);border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-sm);border:1px solid rgba(0,0,0,0.06);transition:var(--transition);position:relative; }
+    .package-card:hover { transform:translateY(-8px);box-shadow:var(--shadow-lg); }
+    .package-card.featured { border:2px solid var(--gold); }
+    .package-badge { position:absolute;top:20px;right:20px;background:var(--gold);color:var(--navy-dark);font-size:0.68rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;padding:4px 10px;border-radius:100px; }
+    .package-header { padding:28px 28px 20px; background:linear-gradient(135deg,var(--navy),var(--navy-dark));; }
+    .package-icon { width:48px;height:48px;background:var(--gold-dim);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:20px;margin-bottom:16px; }
+    .package-name { font-family:var(--font-display);font-size:1.3rem;font-weight:700;color:var(--white);margin-bottom:6px; }
+    .package-desc { font-size:0.85rem;color:rgba(255,255,255,0.65);line-height:1.6; }
+    .package-body { padding:24px 28px; }
+    .package-features { display:flex;flex-direction:column;gap:10px;margin-bottom:20px; }
+    .package-feature { display:flex;align-items:center;gap:10px;font-size:0.85rem;color:var(--text-mid); }
+    .package-feature i { color:var(--gold);font-size:12px;flex-shrink:0; }
+    .industries-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:16px; }
+    @media(max-width:1024px){ .industries-grid{grid-template-columns:repeat(3,1fr);} }
+    @media(max-width:640px){ .industries-grid{grid-template-columns:repeat(2,1fr);} }
+    .process-steps { display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative; }
+    .process-steps::before { content:'';position:absolute;top:28px;left:10%;right:10%;height:2px;background:linear-gradient(90deg,var(--gold),var(--gold-light));z-index:0; }
+    @media(max-width:768px){ .process-steps{grid-template-columns:1fr;gap:20px;} .process-steps::before{display:none;} }
+    .process-step { text-align:center;position:relative;z-index:1; }
+    .process-step-num { width:56px;height:56px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:1.4rem;font-weight:700;color:var(--navy-dark);margin:0 auto 16px;box-shadow:0 0 0 8px var(--off-white); }
+    .process-step h4 { font-weight:600;font-size:0.95rem;color:var(--text-dark);margin-bottom:8px; }
+    .process-step p { font-size:0.82rem;color:var(--text-muted);line-height:1.6; }
+    .corp-form { background:var(--white);border-radius:var(--radius-xl);padding:40px;box-shadow:var(--shadow-lg); }
+    .form-row { display:grid;grid-template-columns:1fr 1fr;gap:20px; }
+    @media(max-width:640px){ .form-row{grid-template-columns:1fr;} }
+  </style>
+</head>
+<body>
+<div id="scroll-progress"></div>
+<div id="cursor"></div>
+<div id="cursor-follower"></div>
+<div id="preloader"><img src="assets/images/logo.png" alt="SGLD" class="preloader-logo" /><div class="preloader-bar"><div class="preloader-bar-inner"></div></div></div>
+<div id="cookie-banner"><p>We use cookies to improve your experience. <a href="#">Privacy Policy</a>.</p><div class="cookie-btns"><button class="btn btn-outline btn-sm" id="decline-cookies">Decline</button><button class="btn btn-primary btn-sm" id="accept-cookies">Accept</button></div></div>
+<div id="motion-toggle"><i class="fas fa-wind"></i><span>Reduce Motion</span></div>
+
+<nav id="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo"><img src="assets/images/logo.png" alt="SGLD Logo" /><div class="nav-logo-text"><span class="brand-name">Graduate Leadership</span><span class="brand-motto">Inspire · Succeed</span></div></a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a><a href="about.html" class="nav-link">About</a>
+      <div class="nav-dropdown"><a href="services.html" class="nav-link">Services <i class="fas fa-chevron-down" style="font-size:9px;margin-left:3px;"></i></a><div class="nav-dropdown-menu"><a href="services.html#research">Research &amp; Development</a><a href="services.html#incubation">Business Incubation</a><a href="services.html#lifeskills">Life Skills Coaching</a><a href="services.html#capacity">Capacity Building</a><a href="services.html#corporate">Corporate Training</a><a href="services.html#consultancy">Human Capital Consultancy</a></div></div>
+      <a href="programmes.html" class="nav-link">Programmes</a><a href="corporate.html" class="nav-link active">Corporate</a><a href="impact.html" class="nav-link">Impact</a><a href="blog.html" class="nav-link">Blog</a><a href="contact.html" class="nav-link">Contact</a>
+      <a href="contact.html#enrol" class="nav-link nav-cta">Enrol Now</a>
+    </div>
+    <button class="nav-toggle"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav-mobile"><a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a href="programmes.html">Programmes</a><a href="corporate.html">Corporate</a><a href="impact.html">Impact</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a><a href="contact.html#enrol" class="mobile-cta">Enrol Now</a></div>
+
+<!-- Corporate Hero -->
+<section class="corp-hero">
+  <div class="container corp-hero-content">
+    <div style="max-width:700px;">
+      <div class="hero-tag" data-aos="fade-up"><i class="fas fa-building"></i> Corporate &amp; Institutional Solutions</div>
+      <h1 class="hero-title" data-aos="fade-up" data-aos-delay="80">
+        <span class="line">Empower Your</span>
+        <span class="line"><span class="accent">Workforce.</span></span>
+        <span class="line">Transform Your Organisation.</span>
+      </h1>
+      <p class="hero-sub" data-aos="fade-up" data-aos-delay="160">SGLD partners with corporates, government bodies, and institutions to deliver tailored training programmes, human capital consulting, and strategic workforce development solutions that drive measurable results.</p>
+      <div class="hero-ctas" data-aos="fade-up" data-aos-delay="240">
+        <a href="#enquiry-form" class="btn btn-primary btn-lg"><i class="fas fa-paper-plane"></i> Request a Proposal</a>
+        <a href="tel:+263773208002" class="btn btn-outline btn-lg"><i class="fas fa-phone"></i> Call Us Now</a>
+      </div>
+    </div>
+    <div style="display:flex;gap:32px;margin-top:56px;padding-top:32px;border-top:1px solid rgba(255,255,255,0.1);" data-aos="fade-up" data-aos-delay="320">
+      <div class="hero-stat-item"><div class="hero-stat-num"><span data-counter="40" data-suffix="+">0+</span></div><div class="hero-stat-label">Corporate Clients</div></div>
+      <div class="hero-stat-item"><div class="hero-stat-num"><span data-counter="15" data-suffix="+">0+</span></div><div class="hero-stat-label">Industries Served</div></div>
+      <div class="hero-stat-item"><div class="hero-stat-num"><span data-counter="100" data-suffix="%">0%</span></div><div class="hero-stat-label">Customised Programmes</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Value Proposition -->
+<section class="section bg-off-white">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <div class="section-tag">Why Partner With SGLD</div>
+      <h2 class="section-title">The Corporate <span class="highlight">Advantage</span></h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="grid-3">
+      <div class="service-card" data-aos="fade-up" data-aos-delay="0"><div class="service-card-icon"><i class="fas fa-sliders"></i></div><h3>Fully Customised</h3><p>Every corporate programme is designed from scratch around your industry, team dynamics, business objectives, and specific skill gaps — no generic off-the-shelf content.</p></div>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="80"><div class="service-card-icon"><i class="fas fa-industry"></i></div><h3>Industry Practitioners</h3><p>Our facilitators are active industry professionals, not just academics. Every session is grounded in real-world experience and immediately applicable to your work environment.</p></div>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="160"><div class="service-card-icon"><i class="fas fa-chart-bar"></i></div><h3>Measurable ROI</h3><p>We provide pre-and-post assessment, impact reporting, and follow-up support to ensure your training investment delivers quantifiable improvements in performance and productivity.</p></div>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="0"><div class="service-card-icon"><i class="fas fa-globe"></i></div><h3>Flexible Delivery</h3><p>On-site at your offices, at SGLD's training centre, or live online — we deliver where and when it works best for your team across any time zone.</p></div>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="80"><div class="service-card-icon"><i class="fas fa-language"></i></div><h3>Multilingual Capability</h3><p>Training delivered in English, Shona, Ndebele, Mandarin, or German — enabling true inclusivity and accessibility across diverse workforces.</p></div>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="160"><div class="service-card-icon"><i class="fas fa-shield-halved"></i></div><h3>Accredited Standards</h3><p>All SGLD programmes align with internationally recognised standards including NSSA, ISO, SHE, and sector-specific compliance and regulatory requirements.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Training Packages -->
+<section class="section bg-white">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <div class="section-tag">Corporate Packages</div>
+      <h2 class="section-title">Tailored Training <span class="highlight">Packages</span></h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="packages-grid">
+      <div class="package-card" data-aos="fade-up" data-aos-delay="0">
+        <div class="package-header"><div class="package-icon"><i class="fas fa-users"></i></div><div class="package-name">Team Essentials</div><div class="package-desc">Foundational skills development for teams of up to 15 people.</div></div>
+        <div class="package-body">
+          <div class="package-features">
+            <div class="package-feature"><i class="fas fa-check"></i><span>1–3 day intensive workshop</span></div>
+            <div class="package-feature"><i class="fas fa-check"></i><span>Custom content design</span></div>
+            <div class="package-feature"><i class="fas fa-check"></i><span>Pre-training needs assessment</span></div>
+            <div class="package-feature"><i class="fas fa-check"></i><span>Participant workbooks &amp; materials</span></div>
+            <div class="package-feature"><i class="fas fa-check"></i><span>SGLD certificates of completion</span></div>
+          </div>
+          <a href="#enquiry-form" class="btn btn-outline-gold w-full" style="justify-content:center;">Get a Quote</a>
+        </div>
+      </div>
+      <div class="package-card featured" data-aos="fade-up" data-aos-delay="80">
+        <div class="package-badge">Most Popular</div>
+        <div class="package-header"><div class="package-icon"><i class="fas fa-building"></i></div><div class="package-name">Corporate Growth</div><div class="package-desc">Multi-module development programme for teams of 15–50 professionals.</div></div>
+        <div class="package-body">
+          <div class="package-features">
+            <div class="package-feature"><i class="fas fa-check"></i><span>4–8 week structured programme</span></div>
+            <div class="package-feature"><i class="fas fa-check"></i><span>Full curriculum co-design</span></div>
+            <div class="package-feature"><i class="fas fa-check"></i><span>Pre &amp; post assessments</span></div>
+            <div class="package-feature"><i class="fas fa-check"></i><span>Individual coaching sessions</span></div>
+            <div class="package-feature"><i class="fas fa-check"></i><span>Impact measurement report</span></div>
+            <div class="package-feature"><i class="fas fa-check"></i><span>12-month alumni support access</span></div>
+          </div>
+          <a href="#enquiry-form" class="btn btn-primary w-full" style="justify-content:center;">Get a Quote</a>
+        </div>
+      </div>
+      <div class="package-card" data-aos="fade-up" data-aos-delay="160">
+        <div class="package-header"><div class="package-icon"><i class="fas fa-crown"></i></div><div class="package-name">Enterprise Partnership</div><div class="package-desc">Annual training retainer and consultancy for large organisations.</div></div>
+        <div class="package-body">
+          <div class="package-features">
+            <div class="package-feature"><i class="fas fa-check"></i><span>Annual L&amp;D strategy partnership</span></div>
+            <div class="package-feature"><i class="fas fa-check"></i><span>Unlimited training days per year</span></div>
+            <div class="package-feature"><i class="fas fa-check"></i><span>Dedicated SGLD account manager</span></div>
+            <div class="package-feature"><i class="fas fa-check"></i><span>HR consultancy access</span></div>
+            <div class="package-feature"><i class="fas fa-check"></i><span>Graduate talent pipeline access</span></div>
+            <div class="package-feature"><i class="fas fa-check"></i><span>Priority booking &amp; bespoke content</span></div>
+          </div>
+          <a href="#enquiry-form" class="btn btn-dark w-full" style="justify-content:center;">Contact for Pricing</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section class="section bg-off-white">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <div class="section-tag">Our Process</div>
+      <h2 class="section-title">How Corporate <span class="highlight">Partnerships Work</span></h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="process-steps" data-aos="fade-up" data-aos-delay="80">
+      <div class="process-step"><div class="process-step-num">01</div><h4>Discovery Call</h4><p>We begin with a detailed consultation to understand your organisation, team, challenges, and learning objectives.</p></div>
+      <div class="process-step"><div class="process-step-num">02</div><h4>Needs Analysis</h4><p>SGLD conducts a training needs analysis to identify skills gaps and design the most impactful programme structure.</p></div>
+      <div class="process-step"><div class="process-step-num">03</div><h4>Programme Design</h4><p>Our team co-designs a fully bespoke curriculum aligned to your industry, culture, and specific business outcomes.</p></div>
+      <div class="process-step"><div class="process-step-num">04</div><h4>Deliver &amp; Measure</h4><p>We deliver the programme and provide a post-training impact report with recommendations for continued development.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Industries Served -->
+<section class="section bg-white">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <div class="section-tag">Sectors We Serve</div>
+      <h2 class="section-title">Industries <span class="highlight">We Work With</span></h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="industries-grid">
+      <div class="industry-item" data-aos="fade-up"><i class="fas fa-landmark"></i><span>Government &amp; Public Sector</span></div>
+      <div class="industry-item" data-aos="fade-up"><i class="fas fa-coins"></i><span>Banking &amp; Finance</span></div>
+      <div class="industry-item" data-aos="fade-up"><i class="fas fa-heartbeat"></i><span>Healthcare &amp; Pharma</span></div>
+      <div class="industry-item" data-aos="fade-up"><i class="fas fa-industry"></i><span>Manufacturing &amp; Mining</span></div>
+      <div class="industry-item" data-aos="fade-up"><i class="fas fa-laptop"></i><span>Technology &amp; ICT</span></div>
+      <div class="industry-item" data-aos="fade-up"><i class="fas fa-graduation-cap"></i><span>Education &amp; Academia</span></div>
+      <div class="industry-item" data-aos="fade-up"><i class="fas fa-seedling"></i><span>Agriculture &amp; Agribusiness</span></div>
+      <div class="industry-item" data-aos="fade-up"><i class="fas fa-truck"></i><span>Logistics &amp; Supply Chain</span></div>
+      <div class="industry-item" data-aos="fade-up"><i class="fas fa-store"></i><span>Retail &amp; Consumer</span></div>
+      <div class="industry-item" data-aos="fade-up"><i class="fas fa-hotel"></i><span>Hospitality &amp; Tourism</span></div>
+      <div class="industry-item" data-aos="fade-up"><i class="fas fa-hard-hat"></i><span>Construction &amp; Engineering</span></div>
+      <div class="industry-item" data-aos="fade-up"><i class="fas fa-hands-helping"></i><span>NGOs &amp; Development</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Partnerships -->
+<section class="section bg-off-white">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;">
+      <div data-aos="fade-right">
+        <div class="section-tag no-lines">Strategic Alliances</div>
+        <h2 class="section-title" style="margin-top:8px;">Partnership <span class="highlight">Opportunities</span></h2>
+        <div class="section-divider" style="margin:16px 0 24px;"></div>
+        <p style="color:var(--text-mid);line-height:1.8;margin-bottom:24px;">SGLD actively seeks strategic partnerships with organisations, government bodies, and international institutions that share our commitment to human capital development, graduate employability, and economic growth.</p>
+        <div class="service-features">
+          <div class="feature-item"><i class="fas fa-check-circle"></i><span><strong>Academic Partnerships</strong> — Joint programme delivery, accreditation, and research collaboration with universities and colleges</span></div>
+          <div class="feature-item"><i class="fas fa-check-circle"></i><span><strong>Government &amp; NSSA</strong> — SHE, ISO, and standardisation training aligned with national regulatory frameworks</span></div>
+          <div class="feature-item"><i class="fas fa-check-circle"></i><span><strong>Corporate Partnerships</strong> — Co-branded training, graduate placement, and talent pipeline agreements</span></div>
+          <div class="feature-item"><i class="fas fa-check-circle"></i><span><strong>International Partners</strong> — Cross-border programme delivery, certification, and knowledge exchange</span></div>
+          <div class="feature-item"><i class="fas fa-check-circle"></i><span><strong>Sponsor &amp; Donor Partners</strong> — Fund graduate bursaries and support skills development initiatives</span></div>
+        </div>
+        <a href="#enquiry-form" class="btn btn-primary" style="margin-top:28px;"><i class="fas fa-handshake"></i> Explore Partnership</a>
+      </div>
+      <div data-aos="fade-left">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div style="background:var(--navy);border-radius:var(--radius-lg);padding:24px;text-align:center;color:var(--white);"><i class="fas fa-university" style="font-size:2rem;color:var(--gold);margin-bottom:12px;"></i><div style="font-weight:600;font-size:0.9rem;">Academic Partners</div></div>
+          <div style="background:var(--gold);border-radius:var(--radius-lg);padding:24px;text-align:center;color:var(--navy-dark);"><i class="fas fa-shield-halved" style="font-size:2rem;margin-bottom:12px;"></i><div style="font-weight:600;font-size:0.9rem;">NSSA &amp; ISO Bodies</div></div>
+          <div style="background:var(--gold);border-radius:var(--radius-lg);padding:24px;text-align:center;color:var(--navy-dark);"><i class="fas fa-globe" style="font-size:2rem;margin-bottom:12px;"></i><div style="font-weight:600;font-size:0.9rem;">International Partners</div></div>
+          <div style="background:var(--navy);border-radius:var(--radius-lg);padding:24px;text-align:center;color:var(--white);"><i class="fas fa-briefcase" style="font-size:2rem;color:var(--gold);margin-bottom:12px;"></i><div style="font-weight:600;font-size:0.9rem;">Corporate Sponsors</div></div>
+        </div>
+        <div style="background:var(--white);border-radius:var(--radius-lg);padding:24px;margin-top:16px;box-shadow:var(--shadow-sm);border:1px solid rgba(0,0,0,0.06);">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;"><i class="fas fa-award" style="color:var(--gold);font-size:20px;"></i><span style="font-weight:600;font-size:0.9rem;">ACCA &amp; CIMA Affiliates</span></div>
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;"><i class="fas fa-leaf" style="color:var(--gold);font-size:20px;"></i><span style="font-weight:600;font-size:0.9rem;">SHE Compliance Board</span></div>
+          <div style="display:flex;align-items:center;gap:12px;"><i class="fas fa-certificate" style="color:var(--gold);font-size:20px;"></i><span style="font-weight:600;font-size:0.9rem;">ZimTrade &amp; Industry Bodies</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-banner">
+  <div class="container" data-aos="fade-up">
+    <h2>Ready to Develop Your <span>Team?</span></h2>
+    <p>Join the growing list of Zimbabwean and African organisations that trust SGLD to develop their most valuable asset — their people.</p>
+    <div class="cta-banner-btns"><a href="tel:+263773208002" class="btn btn-primary btn-lg"><i class="fas fa-phone"></i> Call Us Today</a><a href="#enquiry-form" class="btn btn-outline btn-lg"><i class="fas fa-file-alt"></i> Request Proposal</a></div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div><div class="footer-brand-logo"><img src="assets/images/logo.png" alt="SGLD" /><div><div class="footer-brand-name">School of Graduate<br>Leadership Development</div><div class="footer-brand-motto">Inspire · Succeed</div></div></div><p class="footer-about">Bridging academia and industry through expert training, incubation, and consulting since 2023.</p><div class="footer-socials"><a href="#" class="footer-social"><i class="fab fa-facebook-f"></i></a><a href="#" class="footer-social"><i class="fab fa-linkedin-in"></i></a><a href="https://wa.me/263773208002" class="footer-social"><i class="fab fa-whatsapp"></i></a></div></div>
+      <div><h4 class="footer-heading">Quick Links</h4><div class="footer-links"><a href="index.html">Home</a><a href="about.html">About SGLD</a><a href="services.html">Services</a><a href="programmes.html">Programmes</a><a href="corporate.html">Corporate</a><a href="impact.html">Impact</a><a href="contact.html">Contact</a></div></div>
+      <div><h4 class="footer-heading">Corporate</h4><div class="footer-links"><a href="#packages">Training Packages</a><a href="#industries">Industries Served</a><a href="#partnerships">Partnerships</a><a href="#enquiry-form">Request Proposal</a><a href="services.html#consultancy">HR Consultancy</a></div></div>
+      <div><h4 class="footer-heading">Contact</h4><div class="footer-contact-item"><i class="fas fa-location-dot"></i><span>54 Le Rouxe Drive, Hillside, Harare</span></div><div class="footer-contact-item"><i class="fas fa-phone"></i><a href="tel:+263773208002" style="color:inherit;">+263 773 208 002</a></div><div class="footer-contact-item"><i class="fas fa-envelope"></i><a href="mailto:info@graduateleader.co.zw" style="color:inherit;">info@graduateleader.co.zw</a></div></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2024 School of Graduate Leadership Development. All rights reserved.</p><div class="footer-dev">Powered with ❤️ by <a href="https://blaxium.com" target="_blank" rel="noopener">Blaxium</a></div></div>
+  </div>
+</footer>
+
+<a href="https://wa.me/263773208002" id="whatsapp-btn" target="_blank" rel="noopener" aria-label="WhatsApp"><div class="whatsapp-pulse"></div><i class="fab fa-whatsapp"></i></a>
+<button id="scroll-top-btn" aria-label="Scroll to top"><i class="fas fa-arrow-up"></i></button>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="assets/js/main.js"></script>
+<style>@media(max-width:768px){.corp-hero-content>div:last-child{flex-direction:column;gap:16px;} [style*="grid-template-columns:1fr 1.6fr"]{grid-template-columns:1fr !important;} [style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr !important;}}</style>
+</body>
+</html>

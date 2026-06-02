@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+Disallow: /assets/
+Disallow: /*.json$
+
+Sitemap: https://graduateleader.co.zw/sitemap.xml
+
+# School of Graduate Leadership Development
+# https://graduateleader.co.zw

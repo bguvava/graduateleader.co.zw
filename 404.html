@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page Not Found | School of Graduate Leadership Development</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body { min-height:100vh; display:flex; flex-direction:column; }
+    .error-page { flex:1; min-height:100vh; background:linear-gradient(135deg,var(--navy-dark) 0%,var(--navy) 100%); display:flex; align-items:center; justify-content:center; text-align:center; padding:120px 24px 80px; position:relative; overflow:hidden; }
+    .error-page::before { content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(245,166,35,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(245,166,35,0.04) 1px,transparent 1px);background-size:60px 60px; }
+    .error-content { position:relative;z-index:1;max-width:580px; }
+    .error-404 { font-family:var(--font-display);font-size:clamp(6rem,15vw,10rem);font-weight:700;color:rgba(245,166,35,0.15);line-height:1;margin-bottom:-20px;letter-spacing:-0.04em; }
+    .error-logo { width:80px;margin:0 auto 24px; }
+    .error-title { font-family:var(--font-display);font-size:clamp(1.8rem,4vw,2.5rem);font-weight:700;color:var(--white);margin-bottom:16px;line-height:1.2; }
+    .error-title span { color:var(--gold);font-style:italic; }
+    .error-desc { color:rgba(255,255,255,0.65);font-size:1rem;line-height:1.75;margin-bottom:40px; }
+    .error-links { display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:48px; }
+    .quick-nav { display:flex;flex-wrap:wrap;gap:12px;justify-content:center; }
+    .quick-link { padding:10px 18px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:100px;font-size:0.82rem;color:rgba(255,255,255,0.7);transition:var(--transition); }
+    .quick-link:hover { background:rgba(245,166,35,0.15);border-color:var(--border);color:var(--gold); }
+    .error-rings { position:absolute;left:50%;top:50%;transform:translate(-50%,-50%); }
+    .error-ring { position:absolute;border-radius:50%;border:1px solid;transform:translate(-50%,-50%); }
+    .error-ring-1 { width:500px;height:500px;border-color:rgba(245,166,35,0.04);animation:heroRing 20s linear infinite; }
+    .error-ring-2 { width:700px;height:700px;border-color:rgba(245,166,35,0.03);animation:heroRing 28s linear infinite reverse; }
+    @keyframes heroRing { from{transform:translate(-50%,-50%) rotate(0deg);} to{transform:translate(-50%,-50%) rotate(360deg);} }
+  </style>
+</head>
+<body>
+
+<nav id="navbar" class="scrolled">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo"><img src="assets/images/logo.png" alt="SGLD Logo" /><div class="nav-logo-text"><span class="brand-name">Graduate Leadership</span><span class="brand-motto">Inspire · Succeed</span></div></a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a><a href="about.html" class="nav-link">About</a>
+      <a href="services.html" class="nav-link">Services</a><a href="programmes.html" class="nav-link">Programmes</a>
+      <a href="corporate.html" class="nav-link">Corporate</a><a href="impact.html" class="nav-link">Impact</a>
+      <a href="blog.html" class="nav-link">Blog</a><a href="contact.html" class="nav-link">Contact</a>
+      <a href="contact.html#enrol" class="nav-link nav-cta">Enrol Now</a>
+    </div>
+    <button class="nav-toggle"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav-mobile"><a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a href="programmes.html">Programmes</a><a href="corporate.html">Corporate</a><a href="impact.html">Impact</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a><a href="contact.html#enrol" class="mobile-cta">Enrol Now</a></div>
+
+<div class="error-page">
+  <div class="error-rings">
+    <div class="error-ring error-ring-1"></div>
+    <div class="error-ring error-ring-2"></div>
+  </div>
+  <div class="error-content">
+    <div class="error-404">404</div>
+    <img src="assets/images/logo.png" alt="SGLD" class="error-logo" />
+    <h1 class="error-title">This Page Has <span>Graduated</span></h1>
+    <p class="error-desc">The page you're looking for doesn't exist, may have been moved, or is no longer available. But your journey doesn't have to stop here — let's get you back on track.</p>
+    <div class="error-links">
+      <a href="index.html" class="btn btn-primary btn-lg"><i class="fas fa-home"></i> Back to Home</a>
+      <a href="programmes.html" class="btn btn-outline btn-lg"><i class="fas fa-graduation-cap"></i> View Programmes</a>
+    </div>
+    <div style="margin-bottom:20px;font-size:0.78rem;color:rgba(255,255,255,0.35);letter-spacing:0.1em;text-transform:uppercase;">Quick Navigation</div>
+    <div class="quick-nav">
+      <a href="about.html" class="quick-link"><i class="fas fa-info-circle" style="margin-right:5px;"></i>About SGLD</a>
+      <a href="services.html" class="quick-link"><i class="fas fa-cogs" style="margin-right:5px;"></i>Our Services</a>
+      <a href="corporate.html" class="quick-link"><i class="fas fa-building" style="margin-right:5px;"></i>Corporate</a>
+      <a href="impact.html" class="quick-link"><i class="fas fa-chart-line" style="margin-right:5px;"></i>Our Impact</a>
+      <a href="blog.html" class="quick-link"><i class="fas fa-newspaper" style="margin-right:5px;"></i>Blog</a>
+      <a href="contact.html" class="quick-link"><i class="fas fa-envelope" style="margin-right:5px;"></i>Contact</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-bottom" style="padding:20px 0;"><p>&copy; 2024 School of Graduate Leadership Development. All rights reserved.</p><div class="footer-dev">Powered with ❤️ by <a href="https://blaxium.com" target="_blank" rel="noopener">Blaxium</a></div></div>
+  </div>
+</footer>
+
+<a href="https://wa.me/263773208002" id="whatsapp-btn" target="_blank" rel="noopener" aria-label="WhatsApp"><div class="whatsapp-pulse"></div><i class="fab fa-whatsapp"></i></a>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+# SGLD Website - Git Ignore Configuration
+# Exclude development documentation and asset folders
+
+# Development documentation
+.github/issues01.md
+.github/PROJECT_DESCRIPTION.md
+
+# Asset folders (managed separately)
+assets/css/
+assets/js/
+assets/images/
+
+# Local development
+.vscode/
+.idea/
+*.log
+
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini

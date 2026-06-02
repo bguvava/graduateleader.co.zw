@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us | School of Graduate Leadership Development</title>
+  <meta name="description" content="Learn about SGLD's founding story, mission, vision, leadership team, and core values driving graduate development across Zimbabwe and beyond." />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+  <style>
+    .values-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+    @media(max-width:768px){ .values-grid{grid-template-columns:1fr;} }
+    @media(max-width:1024px){ .values-grid{grid-template-columns:repeat(2,1fr);} }
+    .value-card { background:var(--white); border-radius:var(--radius-lg); padding:32px 28px; box-shadow:var(--shadow-sm); border:1px solid rgba(0,0,0,0.06); transition:var(--transition); text-align:center; }
+    .value-card:hover { transform:translateY(-6px); box-shadow:var(--shadow); }
+    .value-icon { width:64px;height:64px;background:var(--gold-dim);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:26px;margin:0 auto 16px;transition:var(--transition); }
+    .value-card:hover .value-icon { background:var(--gold);color:var(--white); }
+    .value-card h3 { font-family:var(--font-display);font-size:1.15rem;font-weight:600;color:var(--text-dark);margin-bottom:10px; }
+    .value-card p { font-size:0.87rem;color:var(--text-muted);line-height:1.65; }
+    .mission-vision { display:grid;grid-template-columns:1fr 1fr;gap:32px; }
+    @media(max-width:768px){ .mission-vision{grid-template-columns:1fr;} }
+    .mv-card { border-radius:var(--radius-xl);padding:40px;position:relative;overflow:hidden; }
+    .mv-card.mission { background:var(--navy); }
+    .mv-card.vision { background:linear-gradient(135deg,#1e3a6e,var(--navy-dark)); }
+    .mv-card::before { content:'';position:absolute;bottom:-30px;right:-30px;width:120px;height:120px;border-radius:50%;background:rgba(245,166,35,0.08); }
+    .mv-icon { width:52px;height:52px;background:var(--gold-dim);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:22px;margin-bottom:20px; }
+    .mv-label { font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:10px; }
+    .mv-title { font-family:var(--font-display);font-size:1.6rem;font-weight:700;color:var(--white);margin-bottom:16px; }
+    .mv-text { font-size:0.92rem;color:rgba(255,255,255,0.72);line-height:1.75; }
+    .team-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:28px; }
+    @media(max-width:1024px){ .team-grid{grid-template-columns:repeat(2,1fr);} }
+    @media(max-width:640px){ .team-grid{grid-template-columns:1fr;} }
+    .accreditation-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:20px; }
+    @media(max-width:1024px){ .accreditation-grid{grid-template-columns:repeat(2,1fr);} }
+    @media(max-width:480px){ .accreditation-grid{grid-template-columns:1fr 1fr;} }
+    .accred-item { background:var(--white);border-radius:var(--radius);padding:20px;text-align:center;box-shadow:var(--shadow-sm);border:1px solid rgba(0,0,0,0.06);transition:var(--transition); }
+    .accred-item:hover { border-color:var(--border);transform:translateY(-3px); }
+    .accred-item i { font-size:26px;color:var(--gold);margin-bottom:10px; }
+    .accred-item span { display:block;font-size:0.82rem;font-weight:600;color:var(--text-dark); }
+  </style>
+</head>
+<body>
+<div id="scroll-progress"></div>
+<div id="cursor"></div>
+<div id="cursor-follower"></div>
+<div id="preloader">
+  <img src="assets/images/logo.png" alt="SGLD" class="preloader-logo" />
+  <div class="preloader-bar"><div class="preloader-bar-inner"></div></div>
+</div>
+<div id="cookie-banner">
+  <p>We use cookies to improve your experience. By continuing, you agree to our <a href="#">Privacy Policy</a>.</p>
+  <div class="cookie-btns">
+    <button class="btn btn-outline btn-sm" id="decline-cookies">Decline</button>
+    <button class="btn btn-primary btn-sm" id="accept-cookies">Accept</button>
+  </div>
+</div>
+<div id="motion-toggle" title="Toggle animations"><i class="fas fa-wind"></i><span>Reduce Motion</span></div>
+
+<nav id="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/images/logo.png" alt="SGLD Logo" />
+      <div class="nav-logo-text"><span class="brand-name">Graduate Leadership</span><span class="brand-motto">Inspire · Succeed</span></div>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link active">About</a>
+      <div class="nav-dropdown">
+        <a href="services.html" class="nav-link">Services <i class="fas fa-chevron-down" style="font-size:9px;margin-left:3px;"></i></a>
+        <div class="nav-dropdown-menu">
+          <a href="services.html#research">Research &amp; Development</a>
+          <a href="services.html#incubation">Business Incubation</a>
+          <a href="services.html#lifeskills">Life Skills Coaching</a>
+          <a href="services.html#capacity">Capacity Building</a>
+          <a href="services.html#corporate">Corporate Training</a>
+          <a href="services.html#consultancy">Human Capital Consultancy</a>
+        </div>
+      </div>
+      <a href="programmes.html" class="nav-link">Programmes</a>
+      <a href="corporate.html" class="nav-link">Corporate</a>
+      <a href="impact.html" class="nav-link">Impact</a>
+      <a href="blog.html" class="nav-link">Blog</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+      <a href="contact.html#enrol" class="nav-link nav-cta">Enrol Now</a>
+    </div>
+    <button class="nav-toggle" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav-mobile">
+  <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a>
+  <a href="programmes.html">Programmes</a><a href="corporate.html">Corporate</a>
+  <a href="impact.html">Impact</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a>
+  <a href="contact.html#enrol" class="mobile-cta">Enrol Now</a>
+</div>
+
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="container page-hero-content">
+    <div class="page-breadcrumb"><a href="index.html">Home</a><i class="fas fa-chevron-right"></i><span>About Us</span></div>
+    <h1 class="page-hero-title">About <span>SGLD</span></h1>
+    <p class="page-hero-sub">A specialist post-graduate institution built to bridge academia and industry — for Zimbabwe, and for the world.</p>
+  </div>
+</section>
+
+<!-- Story Section -->
+<section class="section bg-off-white">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;" class="story-grid">
+      <div data-aos="fade-right">
+        <div class="section-tag no-lines">Our Story</div>
+        <h2 class="section-title" style="margin-top:8px;">Born From a <span class="highlight">National Need</span></h2>
+        <div class="section-divider" style="margin:16px 0;"></div>
+        <p style="color:var(--text-mid);line-height:1.8;margin-bottom:16px;">The School of Graduate Leadership Development was incorporated in Zimbabwe in 2023 in direct response to one of the country's most pressing socio-economic challenges — graduate unemployment. Despite graduating thousands of young professionals annually, Zimbabwe's universities and colleges were producing graduates who lacked the practical, industry-relevant skills that employers actually needed.</p>
+        <p style="color:var(--text-mid);line-height:1.8;margin-bottom:24px;">SGLD was founded to close that gap. Operating under the philosophy of <em>lifelong learning</em>, we exist not as a degree-awarding institution, but as a dynamic skills-development and capacity-building powerhouse that bridges the worlds of academia and industry.</p>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;">
+          <div style="background:var(--white);border-radius:var(--radius);padding:16px 20px;box-shadow:var(--shadow-sm);border:1px solid rgba(0,0,0,0.06);flex:1;min-width:120px;">
+            <div style="font-family:var(--font-display);font-size:2rem;font-weight:700;color:var(--gold);">2023</div>
+            <div style="font-size:0.78rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;">Year Founded</div>
+          </div>
+          <div style="background:var(--white);border-radius:var(--radius);padding:16px 20px;box-shadow:var(--shadow-sm);border:1px solid rgba(0,0,0,0.06);flex:1;min-width:120px;">
+            <div style="font-family:var(--font-display);font-size:2rem;font-weight:700;color:var(--gold);">500+</div>
+            <div style="font-size:0.78rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;">Graduates Served</div>
+          </div>
+          <div style="background:var(--white);border-radius:var(--radius);padding:16px 20px;box-shadow:var(--shadow-sm);border:1px solid rgba(0,0,0,0.06);flex:1;min-width:120px;">
+            <div style="font-family:var(--font-display);font-size:2rem;font-weight:700;color:var(--gold);">6+</div>
+            <div style="font-size:0.78rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;">Countries Reached</div>
+          </div>
+        </div>
+      </div>
+      <div data-aos="fade-left">
+        <div style="background:var(--navy);border-radius:var(--radius-xl);padding:40px;position:relative;overflow:hidden;">
+          <div style="position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:rgba(245,166,35,0.07);"></div>
+          <img src="assets/images/logo.png" alt="SGLD" style="width:100px;margin-bottom:24px;filter:brightness(1.1);" />
+          <h3 style="font-family:var(--font-display);font-size:1.5rem;font-weight:700;color:var(--white);margin-bottom:12px;">Not a College.<br>A <span style="color:var(--gold);font-style:italic;">Career Catalyst.</span></h3>
+          <p style="color:rgba(255,255,255,0.65);font-size:0.9rem;line-height:1.75;">SGLD is not a degree-awarding institution. We are a specialist skills-development organisation focused on equipping individuals and organisations with the competencies that drive real economic value and career advancement.</p>
+          <div style="margin-top:28px;display:flex;align-items:center;gap:12px;">
+            <div style="width:40px;height:40px;background:var(--gold-dim);border-radius:50%;display:flex;align-items:center;justify-content:center;"><i class="fas fa-quote-left" style="color:var(--gold);font-size:14px;"></i></div>
+            <p style="color:rgba(255,255,255,0.5);font-size:0.82rem;font-style:italic;">Lifelong learning. Lasting impact.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Mission & Vision -->
+<section class="section bg-white">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <div class="section-tag">Purpose &amp; Direction</div>
+      <h2 class="section-title">Mission &amp; <span class="highlight">Vision</span></h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="mission-vision" data-aos="fade-up" data-aos-delay="100">
+      <div class="mv-card mission">
+        <div class="mv-icon"><i class="fas fa-bullseye"></i></div>
+        <div class="mv-label">Our Mission</div>
+        <div class="mv-title">Equipping Leaders for Today's Challenges</div>
+        <p class="mv-text">To bridge the widening gap between academic institutions and industry by equipping graduates, corporates, and institutions with practical competencies, leadership skills, and industry-specific knowledge — nurturing innovation, supporting business incubation, and forging strategic partnerships locally and internationally.</p>
+      </div>
+      <div class="mv-card vision">
+        <div class="mv-icon"><i class="fas fa-eye"></i></div>
+        <div class="mv-label">Our Vision</div>
+        <div class="mv-title">Africa's Premier Graduate Development Hub</div>
+        <p class="mv-text">To become the most impactful post-graduate professional development institution in Africa — recognised for transforming graduates into industry leaders, catalysing entrepreneurship, and building the human capital that drives sustainable economic growth across the continent.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Core Values -->
+<section class="section bg-off-white">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <div class="section-tag">What Guides Us</div>
+      <h2 class="section-title">Our Core <span class="highlight">Values</span></h2>
+      <div class="section-divider"></div>
+      <p class="section-subtitle">Every programme, partnership, and interaction at SGLD is governed by these foundational principles.</p>
+    </div>
+    <div class="values-grid">
+      <div class="value-card" data-aos="fade-up" data-aos-delay="0">
+        <div class="value-icon"><i class="fas fa-star"></i></div>
+        <h3>Excellence</h3>
+        <p>We hold ourselves to the highest standards in every programme, interaction, and outcome — excellence is not optional, it is our baseline.</p>
+      </div>
+      <div class="value-card" data-aos="fade-up" data-aos-delay="80">
+        <div class="value-icon"><i class="fas fa-lightbulb"></i></div>
+        <h3>Innovation</h3>
+        <p>We embrace new ideas, technologies, and approaches that challenge the status quo and create better pathways for graduates and organisations.</p>
+      </div>
+      <div class="value-card" data-aos="fade-up" data-aos-delay="160">
+        <div class="value-icon"><i class="fas fa-handshake"></i></div>
+        <h3>Integrity</h3>
+        <p>We operate with transparency, honesty, and accountability — building trust with every graduate, client, and partner we work with.</p>
+      </div>
+      <div class="value-card" data-aos="fade-up" data-aos-delay="0">
+        <div class="value-icon"><i class="fas fa-users"></i></div>
+        <h3>Inclusivity</h3>
+        <p>We believe that development should be accessible to all — regardless of background, gender, or geography. Diversity makes us stronger.</p>
+      </div>
+      <div class="value-card" data-aos="fade-up" data-aos-delay="80">
+        <div class="value-icon"><i class="fas fa-rocket"></i></div>
+        <h3>Impact</h3>
+        <p>Every programme we deliver is measured by its real-world impact — employment outcomes, business growth, and community transformation.</p>
+      </div>
+      <div class="value-card" data-aos="fade-up" data-aos-delay="160">
+        <div class="value-icon"><i class="fas fa-book-open"></i></div>
+        <h3>Lifelong Learning</h3>
+        <p>We champion a culture of continuous growth — because in a rapidly evolving world, the commitment to keep learning is the greatest competitive advantage.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Milestones Timeline -->
+<section class="section bg-white">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;">
+      <div data-aos="fade-right">
+        <div class="section-tag no-lines">Our Journey</div>
+        <h2 class="section-title" style="margin-top:8px;">SGLD <span class="highlight">Milestones</span></h2>
+        <div class="section-divider" style="margin:16px 0 32px;"></div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-date">Q1 2023</div>
+            <div class="timeline-title">SGLD Incorporated</div>
+            <p class="timeline-desc">School of Graduate Leadership Development officially incorporated in Zimbabwe with a mandate to bridge the gap between academia and industry.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">Q2 2023</div>
+            <div class="timeline-title">First Training Cohort</div>
+            <p class="timeline-desc">Launched our inaugural capacity building and life skills programmes, welcoming our first cohort of graduates from universities across Harare.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">Q3 2023</div>
+            <div class="timeline-title">Corporate Partnerships Established</div>
+            <p class="timeline-desc">Secured first corporate training contracts and consultancy agreements with leading Zimbabwean organisations across multiple sectors.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">Q4 2023</div>
+            <div class="timeline-title">Virtual Training Platform Launch</div>
+            <p class="timeline-desc">Expanded delivery to include Live Virtual Training, enabling graduates across Zimbabwe and internationally to access our programmes remotely.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2024</div>
+            <div class="timeline-title">Business Incubation Programme</div>
+            <p class="timeline-desc">Launched dedicated business incubation support, mentorship networks, and entrepreneurship tracks — celebrating first batch of incubated businesses.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2024 – Present</div>
+            <div class="timeline-title">International Partnerships &amp; Expansion</div>
+            <p class="timeline-desc">Forged strategic alliances with NSSA, ISO bodies, ACCA partners, and international institutions — expanding reach to 6+ countries across Africa and beyond.</p>
+          </div>
+        </div>
+      </div>
+      <div data-aos="fade-left" style="position:sticky;top:100px;">
+        <div style="background:var(--navy-dark);border-radius:var(--radius-xl);padding:40px;color:var(--white);margin-bottom:24px;">
+          <img src="assets/images/logo.png" alt="SGLD" style="width:80px;margin-bottom:20px;" />
+          <h3 style="font-family:var(--font-display);font-size:1.8rem;font-weight:700;margin-bottom:12px;">Inspire.<br><span style="color:var(--gold);font-style:italic;">Succeed.</span></h3>
+          <p style="color:rgba(255,255,255,0.65);font-size:0.9rem;line-height:1.75;margin-bottom:24px;">Two words. One purpose. Every programme, every partnership, every graduate trained is a step toward a Zimbabwe where talent meets opportunity.</p>
+          <div style="border-top:1px solid rgba(255,255,255,0.1);padding-top:20px;">
+            <div style="font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">Motto</div>
+            <div style="font-family:var(--font-display);font-size:1.2rem;font-weight:600;">For Today. For Tomorrow.</div>
+          </div>
+        </div>
+        <div style="background:var(--gold);border-radius:var(--radius-lg);padding:28px;color:var(--navy-dark);">
+          <i class="fas fa-quote-left" style="font-size:24px;margin-bottom:12px;opacity:0.6;"></i>
+          <p style="font-family:var(--font-display);font-size:1.15rem;font-weight:600;font-style:italic;line-height:1.5;margin-bottom:12px;">"The future belongs to those who invest in their development today."</p>
+          <span style="font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;">— SGLD Founding Principle</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Leadership Team -->
+<section class="section bg-off-white">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <div class="section-tag">The People Behind SGLD</div>
+      <h2 class="section-title">Our <span class="highlight">Leadership</span> Team</h2>
+      <div class="section-divider"></div>
+      <p class="section-subtitle">Experienced professionals committed to transforming graduates and organisations across Zimbabwe and Africa.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card" data-aos="fade-up" data-aos-delay="0" style="height:320px;">
+        <div class="team-card-inner" style="height:100%;">
+          <div class="team-card-front" style="height:100%;">
+            <img src="assets/images/team/Prof-Makaya.jpeg" alt="Prof. Eugine Makaya" style="width:100%;height:230px;object-fit:cover;border-radius:var(--radius-lg) var(--radius-lg) 0 0;" />
+            <div class="team-info">
+              <div class="team-name">Prof. Eugine Makaya</div>
+              <div class="team-role">Executive Chairman</div>
+            </div>
+          </div>
+          <div class="team-card-back">
+            <div class="team-back-name">Prof. Eugine Makaya</div>
+            <div class="team-back-role">Executive Chairman</div>
+            <p class="team-back-bio">A seasoned professional with decades of industry and academic leadership experience, driving SGLD's vision of bridging Zimbabwe's skills gap and creating pathways to prosperity for graduates.</p>
+          </div>
+        </div>
+      </div>
+      <div class="team-card" data-aos="fade-up" data-aos-delay="100" style="height:320px;">
+        <div class="team-card-inner" style="height:100%;">
+          <div class="team-card-front" style="height:100%;">
+            <img src="assets/images/team/Mr-Kin.jpeg" alt="Mr Ronne Kin" style="width:100%;height:230px;object-fit:cover;border-radius:var(--radius-lg) var(--radius-lg) 0 0;" />
+            <div class="team-info">
+              <div class="team-name">Mr Ronne Kin</div>
+              <div class="team-role">Corporate Relations Director</div>
+            </div>
+          </div>
+          <div class="team-card-back">
+            <div class="team-back-name">Mr Ronne Kin</div>
+            <div class="team-back-role">Corporate Relations Director</div>
+            <p class="team-back-bio">Manages SGLD's growing portfolio of corporate clients, strategic partnerships, and institutional alliances — connecting organisations with tailored training and consultancy solutions.</p>
+          </div>
+        </div>
+      </div>
+      <div class="team-card" data-aos="fade-up" data-aos-delay="200" style="height:320px;">
+        <div class="team-card-inner" style="height:100%;">
+          <div class="team-card-front" style="height:100%;">
+            <img src="assets/images/team/Dr-Georges.jpeg" alt="Dr Martha Georges" style="width:100%;height:230px;object-fit:cover;border-radius:var(--radius-lg) var(--radius-lg) 0 0;" />
+            <div class="team-info">
+              <div class="team-name">Dr Martha Georges</div>
+              <div class="team-role">Head of Programmes</div>
+            </div>
+          </div>
+          <div class="team-card-back">
+            <div class="team-back-name">Dr Martha Georges</div>
+            <div class="team-back-role">Head of Programmes</div>
+            <p class="team-back-bio">Oversees programme design, curriculum development, and quality assurance across all SGLD offerings — ensuring every programme is industry-relevant and practically impactful.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p style="text-align:center;color:var(--text-muted);font-size:0.88rem;margin-top:32px;font-style:italic;" data-aos="fade-up">Hover over team cards to learn more. Our full team profiles are available on request.</p>
+  </div>
+</section>
+
+<!-- Accreditation & Partners -->
+<section class="section bg-white">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <div class="section-tag">Credibility &amp; Trust</div>
+      <h2 class="section-title">Accreditations &amp; <span class="highlight">Affiliations</span></h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="accreditation-grid">
+      <div class="accred-item" data-aos="fade-up" data-aos-delay="0"><i class="fas fa-shield-halved"></i><span>NSSA Zimbabwe</span></div>
+      <div class="accred-item" data-aos="fade-up" data-aos-delay="60"><i class="fas fa-certificate"></i><span>ISO Standards Bodies</span></div>
+      <div class="accred-item" data-aos="fade-up" data-aos-delay="120"><i class="fas fa-award"></i><span>ACCA Global</span></div>
+      <div class="accred-item" data-aos="fade-up" data-aos-delay="180"><i class="fas fa-medal"></i><span>CIMA Affiliates</span></div>
+      <div class="accred-item" data-aos="fade-up" data-aos-delay="0"><i class="fas fa-leaf"></i><span>SHE Compliance Board</span></div>
+      <div class="accred-item" data-aos="fade-up" data-aos-delay="60"><i class="fas fa-globe"></i><span>International Partners</span></div>
+      <div class="accred-item" data-aos="fade-up" data-aos-delay="120"><i class="fas fa-graduation-cap"></i><span>Academic Institutions</span></div>
+      <div class="accred-item" data-aos="fade-up" data-aos-delay="180"><i class="fas fa-building-columns"></i><span>ZimTrade Partners</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Map -->
+<section class="section-sm bg-off-white">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <div class="section-tag">Find Us</div>
+      <h2 class="section-title">Our <span class="highlight">Location</span></h2>
+      <div class="section-divider"></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 2fr;gap:32px;align-items:start;" data-aos="fade-up" data-aos-delay="100">
+      <div>
+        <div style="background:var(--navy);border-radius:var(--radius-lg);padding:32px;color:var(--white);">
+          <h3 style="font-family:var(--font-display);font-size:1.3rem;font-weight:600;margin-bottom:20px;">Visit Our Office</h3>
+          <div class="footer-contact-item" style="margin-bottom:16px;"><i class="fas fa-location-dot" style="color:var(--gold);margin-right:10px;"></i><span style="font-size:0.88rem;color:rgba(255,255,255,0.75);">54 Le Rouxe Drive, Hillside, Harare, Zimbabwe</span></div>
+          <div class="footer-contact-item" style="margin-bottom:16px;"><i class="fas fa-phone" style="color:var(--gold);margin-right:10px;"></i><a href="tel:+263773208002" style="color:rgba(255,255,255,0.75);font-size:0.88rem;">+263 773 208 002</a></div>
+          <div class="footer-contact-item" style="margin-bottom:16px;"><i class="fas fa-envelope" style="color:var(--gold);margin-right:10px;"></i><a href="mailto:info@graduateleader.co.zw" style="color:rgba(255,255,255,0.75);font-size:0.88rem;">info@graduateleader.co.zw</a></div>
+          <div style="border-top:1px solid rgba(255,255,255,0.1);padding-top:16px;margin-top:8px;">
+            <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">Office Hours</div>
+            <div style="font-size:0.85rem;color:rgba(255,255,255,0.65);">Mon – Fri: 8:00 AM – 5:00 PM<br>Saturday: 8:00 AM – 1:00 PM</div>
+          </div>
+          <a href="contact.html" class="btn btn-primary" style="margin-top:20px;width:100%;justify-content:center;">Get Directions</a>
+        </div>
+      </div>
+      <div class="map-wrapper">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7596.165312036205!2d31.080366875422495!3d-17.834759772354513!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1931bb35ea220251%3A0x54e67e60850ba489!2s54%20Le%20Roux%20Dr%2C%20Harare!5e0!3m2!1sen!2szw!4v1780083074416!5m2!1sen!2szw" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="SGLD Office Location"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-banner">
+  <div class="container" data-aos="fade-up">
+    <h2>Ready to <span>Transform</span> Your Career?</h2>
+    <p>Join SGLD and become part of Zimbabwe's growing community of skilled, empowered, and industry-ready graduates.</p>
+    <div class="cta-banner-btns">
+      <a href="programmes.html" class="btn btn-primary btn-lg"><i class="fas fa-graduation-cap"></i> Browse Programmes</a>
+      <a href="contact.html" class="btn btn-outline btn-lg"><i class="fas fa-envelope"></i> Contact Us</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-logo"><img src="assets/images/logo.png" alt="SGLD" /><div><div class="footer-brand-name">School of Graduate<br>Leadership Development</div><div class="footer-brand-motto">Inspire · Succeed</div></div></div>
+        <p class="footer-about">A specialist post-graduate professional development institution bridging academia and industry since 2023. For Today. For Tomorrow.</p>
+        <div class="footer-socials">
+          <a href="#" class="footer-social"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="footer-social"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="footer-social"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="footer-social"><i class="fab fa-youtube"></i></a>
+          <a href="https://wa.me/263773208002" class="footer-social"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div><h4 class="footer-heading">Quick Links</h4><div class="footer-links"><a href="index.html">Home</a><a href="about.html">About SGLD</a><a href="services.html">Our Services</a><a href="programmes.html">Programmes</a><a href="corporate.html">Corporate</a><a href="impact.html">Our Impact</a><a href="blog.html">Blog</a><a href="contact.html">Contact Us</a></div></div>
+      <div><h4 class="footer-heading">Services</h4><div class="footer-links"><a href="services.html#research">Research &amp; Dev</a><a href="services.html#incubation">Business Incubation</a><a href="services.html#lifeskills">Life Skills Coaching</a><a href="services.html#capacity">Capacity Building</a><a href="services.html#consultancy">HR Consultancy</a><a href="services.html#corporate">Corporate Training</a></div></div>
+      <div><h4 class="footer-heading">Contact Us</h4>
+        <div class="footer-contact-item"><i class="fas fa-location-dot"></i><span>54 Le Rouxe Drive, Hillside, Harare, Zimbabwe</span></div>
+        <div class="footer-contact-item"><i class="fas fa-phone"></i><a href="tel:+263773208002" style="color:inherit;">+263 773 208 002</a></div>
+        <div class="footer-contact-item"><i class="fas fa-envelope"></i><a href="mailto:info@graduateleader.co.zw" style="color:inherit;">info@graduateleader.co.zw</a></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 School of Graduate Leadership Development. All rights reserved.</p>
+      <div class="footer-dev">Powered with ❤️ by <a href="https://blaxium.com" target="_blank" rel="noopener">Blaxium</a></div>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/263773208002" id="whatsapp-btn" target="_blank" rel="noopener" aria-label="WhatsApp"><div class="whatsapp-pulse"></div><i class="fab fa-whatsapp"></i></a>
+<button id="scroll-top-btn" aria-label="Scroll to top"><i class="fas fa-arrow-up"></i></button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="assets/js/main.js"></script>
+<style>
+  @media(max-width:768px){ .story-grid{grid-template-columns:1fr !important;gap:32px !important;} }
+</style>
+</body>
+</html>

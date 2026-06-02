@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Services | School of Graduate Leadership Development</title>
+  <meta name="description" content="Explore SGLD's comprehensive services: research & development, business incubation, life skills coaching, capacity building, corporate training and human capital consultancy." />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+  <style>
+    .service-detail { scroll-margin-top: 100px; padding: 80px 0; }
+    .service-detail:nth-child(even) { background: var(--white); }
+    .service-detail:nth-child(odd) { background: var(--off-white); }
+    .service-detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+    .service-detail-grid.reverse { direction: rtl; }
+    .service-detail-grid.reverse > * { direction: ltr; }
+    @media(max-width:768px){ .service-detail-grid, .service-detail-grid.reverse { grid-template-columns:1fr; direction:ltr; gap:40px; } }
+    .service-visual { background: var(--navy); border-radius: var(--radius-xl); padding: 40px; position: relative; overflow: hidden; min-height: 320px; display: flex; flex-direction: column; justify-content: flex-end; }
+    .service-visual::before { content: ''; position: absolute; top: -40px; right: -40px; width: 200px; height: 200px; border-radius: 50%; background: rgba(245,166,35,0.07); }
+    .service-visual-icon { font-size: 4rem; color: rgba(245,166,35,0.25); position: absolute; top: 32px; right: 32px; }
+    .service-tag { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+    .service-visual-title { font-family: var(--font-display); font-size: 1.8rem; font-weight: 700; color: var(--white); margin-bottom: 12px; line-height: 1.2; }
+    .service-visual-text { font-size: 0.88rem; color: rgba(255,255,255,0.65); line-height: 1.7; }
+    .service-features { margin-top: 24px; display: flex; flex-direction: column; gap: 12px; }
+    .feature-item { display: flex; align-items: flex-start; gap: 12px; }
+    .feature-item i { color: var(--gold); margin-top: 3px; flex-shrink: 0; }
+    .feature-item span { font-size: 0.88rem; color: var(--text-mid); line-height: 1.5; }
+    .delivery-modes { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; }
+    @media(max-width:640px){ .delivery-modes { grid-template-columns: 1fr; } }
+    .mode-card { background: var(--white); border-radius: var(--radius-lg); padding: 28px; border: 1px solid rgba(0,0,0,0.06); box-shadow: var(--shadow-sm); transition: var(--transition); display: flex; gap: 16px; align-items: flex-start; }
+    .mode-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: var(--border); }
+    .mode-num { width: 44px; height: 44px; background: var(--navy); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--gold); flex-shrink: 0; }
+    .mode-content h4 { font-weight: 600; color: var(--text-dark); margin-bottom: 6px; }
+    .mode-content p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+    .spec-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
+    @media(max-width:1024px){ .spec-grid { grid-template-columns: repeat(2,1fr); } }
+    @media(max-width:480px){ .spec-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<div id="scroll-progress"></div>
+<div id="cursor"></div>
+<div id="cursor-follower"></div>
+<div id="preloader"><img src="assets/images/logo.png" alt="SGLD" class="preloader-logo" /><div class="preloader-bar"><div class="preloader-bar-inner"></div></div></div>
+<div id="cookie-banner"><p>We use cookies to improve your experience. By continuing, you agree to our <a href="#">Privacy Policy</a>.</p><div class="cookie-btns"><button class="btn btn-outline btn-sm" id="decline-cookies">Decline</button><button class="btn btn-primary btn-sm" id="accept-cookies">Accept</button></div></div>
+<div id="motion-toggle" title="Toggle animations"><i class="fas fa-wind"></i><span>Reduce Motion</span></div>
+
+<nav id="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo"><img src="assets/images/logo.png" alt="SGLD Logo" /><div class="nav-logo-text"><span class="brand-name">Graduate Leadership</span><span class="brand-motto">Inspire · Succeed</span></div></a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a><a href="about.html" class="nav-link">About</a>
+      <div class="nav-dropdown"><a href="services.html" class="nav-link active">Services <i class="fas fa-chevron-down" style="font-size:9px;margin-left:3px;"></i></a><div class="nav-dropdown-menu"><a href="services.html#research">Research &amp; Development</a><a href="services.html#incubation">Business Incubation</a><a href="services.html#lifeskills">Life Skills Coaching</a><a href="services.html#capacity">Capacity Building</a><a href="services.html#corporate">Corporate Training</a><a href="services.html#consultancy">Human Capital Consultancy</a></div></div>
+      <a href="programmes.html" class="nav-link">Programmes</a><a href="corporate.html" class="nav-link">Corporate</a><a href="impact.html" class="nav-link">Impact</a><a href="blog.html" class="nav-link">Blog</a><a href="contact.html" class="nav-link">Contact</a>
+      <a href="contact.html#enrol" class="nav-link nav-cta">Enrol Now</a>
+    </div>
+    <button class="nav-toggle" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav-mobile"><a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a href="programmes.html">Programmes</a><a href="corporate.html">Corporate</a><a href="impact.html">Impact</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a><a href="contact.html#enrol" class="mobile-cta">Enrol Now</a></div>
+
+<section class="page-hero">
+  <div class="container page-hero-content">
+    <div class="page-breadcrumb"><a href="index.html">Home</a><i class="fas fa-chevron-right"></i><span>Services</span></div>
+    <h1 class="page-hero-title">Our <span>Services</span></h1>
+    <p class="page-hero-sub">End-to-end professional development solutions for individuals, corporates, and institutions.</p>
+  </div>
+</section>
+
+<!-- Services Overview -->
+<section class="section bg-off-white">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <div class="section-tag">What We Do</div>
+      <h2 class="section-title">Comprehensive <span class="highlight">Development</span> Ecosystem</h2>
+      <div class="section-divider"></div>
+      <p class="section-subtitle">From research and incubation to corporate consulting — SGLD delivers holistic solutions tailored to your growth objectives.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;" data-aos="fade-up" data-aos-delay="100">
+      <a href="#research" style="text-decoration:none;"><div class="service-card"><div class="service-card-icon"><i class="fas fa-flask"></i></div><h3>Research &amp; Development</h3><p>Applied research connecting academia with industry for evidence-based, innovative solutions.</p><span class="card-link">Explore <i class="fas fa-arrow-right"></i></span></div></a>
+      <a href="#incubation" style="text-decoration:none;"><div class="service-card"><div class="service-card-icon"><i class="fas fa-lightbulb"></i></div><h3>Business Incubation</h3><p>Mentorship, resources, and networks to launch and scale successful ventures.</p><span class="card-link">Explore <i class="fas fa-arrow-right"></i></span></div></a>
+      <a href="#lifeskills" style="text-decoration:none;"><div class="service-card"><div class="service-card-icon"><i class="fas fa-heart-pulse"></i></div><h3>Life Skills Coaching</h3><p>Holistic programmes building emotional intelligence, leadership presence, and personal effectiveness.</p><span class="card-link">Explore <i class="fas fa-arrow-right"></i></span></div></a>
+      <a href="#capacity" style="text-decoration:none;"><div class="service-card"><div class="service-card-icon"><i class="fas fa-chart-line"></i></div><h3>Capacity Building</h3><p>Four flexible delivery modes meeting your exact context, location, and learning objectives.</p><span class="card-link">Explore <i class="fas fa-arrow-right"></i></span></div></a>
+      <a href="#consultancy" style="text-decoration:none;"><div class="service-card"><div class="service-card-icon"><i class="fas fa-users-gear"></i></div><h3>Human Capital Consultancy</h3><p>Strategic HR and talent development aligned with your organisational goals and market demands.</p><span class="card-link">Explore <i class="fas fa-arrow-right"></i></span></div></a>
+      <a href="#corporate" style="text-decoration:none;"><div class="service-card"><div class="service-card-icon"><i class="fas fa-briefcase"></i></div><h3>Corporate Training Solutions</h3><p>Tailored, industry-experienced training delivered in-house or online to your team.</p><span class="card-link">Explore <i class="fas fa-arrow-right"></i></span></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- Research & Development -->
+<div id="research" class="service-detail">
+  <div class="container">
+    <div class="service-detail-grid">
+      <div class="service-visual" data-aos="fade-right">
+        <i class="fas fa-flask service-visual-icon"></i>
+        <div class="service-tag">Service 01</div>
+        <div class="service-visual-title">Research &amp; Development</div>
+        <p class="service-visual-text">Where insight meets innovation — bridging theory and practice for real-world impact.</p>
+      </div>
+      <div data-aos="fade-left">
+        <div class="section-tag no-lines">Research &amp; Development</div>
+        <h2 class="section-title" style="margin-top:8px;">Evidence-Based <span class="highlight">Innovation</span></h2>
+        <div class="section-divider" style="margin:16px 0 20px;"></div>
+        <p style="color:var(--text-mid);line-height:1.8;margin-bottom:24px;">SGLD's Research &amp; Development arm bridges the gap between academic knowledge and practical industry application. We conduct applied research, facilitate knowledge exchange, and generate insights that drive evidence-based decision-making for organisations and policymakers.</p>
+        <div class="service-features">
+          <div class="feature-item"><i class="fas fa-check-circle"></i><span>Applied industry research and feasibility studies</span></div>
+          <div class="feature-item"><i class="fas fa-check-circle"></i><span>Knowledge exchange between academia and corporates</span></div>
+          <div class="feature-item"><i class="fas fa-check-circle"></i><span>Labour market intelligence and skills gap analysis</span></div>
+          <div class="feature-item"><i class="fas fa-check-circle"></i><span>Evidence-based policy and programme design support</span></div>
+          <div class="feature-item"><i class="fas fa-check-circle"></i><span>Innovation workshops and collaborative R&amp;D projects</span></div>
+          <div class="feature-item"><i class="fas fa-check-circle"></i><span>Publication of insights reports and white papers</span></div>
+        </div>
+        <a href="contact.html" class="btn btn-primary" style="margin-top:28px;"><i class="fas fa-envelope"></i> Enquire About R&amp;D</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Business Incubation -->
+<div id="incubation" class="service-detail">
+  <div class="container">
+    <div class="service-detail-grid reverse">
+      <div class="service-visual" data-aos="fade-left">
+        <i class="fas fa-lightbulb service-visual-icon"></i>
+        <div class="service-tag">Service 02</div>
+        <div class="service-visual-title">Business Incubation</div>
+        <p class="service-visual-text">Transforming bold ideas into thriving businesses through mentorship, networks, and resources.</p>
+      </div>
+      <div data-aos="fade-right">
+        <div class="section-tag no-lines">Business Incubation</div>
+        <h2 class="section-title" style="margin-top:8px;">From Idea to <span class="highlight">Enterprise</span></h2>
+        <div class="section-divider" style="margin:16px 0 20px;"></div>
+        <p style="color:var(--text-mid);line-height:1.8;margin-bottom:24px;">SGLD's Business Incubation Programme nurtures Zimbabwe's next generation of entrepreneurs. We provide structured support, expert mentorship, and access to networks that transform innovative ideas into viable, sustainable businesses — addressing unemployment through entrepreneurship.</p>
+        <div class="service-features">
+          <div class="feature-item"><i class="fas fa-check-circle"></i><span>Structured 3–6 month incubation programme</span></div>
+          <div class="feature-item"><i class="fas fa-check-circle"></i><span>Business model development and validation</span></div>
+          <div class="feature-item"><i class="fas fa-check-circle"></i><span>Access to mentors, investors, and industry networks</span></div>
+          <div class="feature-item"><i class="fas fa-check-circle"></i><span>Legal, financial, and marketing fundamentals</span></div>
+          <div class="feature-item"><i class="fas fa-check-circle"></i><span>Pitch preparation and investor readiness</span></div>
+          <div class="feature-item"><i class="fas fa-check-circle"></i><span>Post-incubation alumni support and ecosystem access</span></div>
+        </div>
+        <a href="contact.html" class="btn btn-primary" style="margin-top:28px;"><i class="fas fa-rocket"></i> Apply for Incubation</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Life Skills Coaching -->
+<div id="lifeskills" class="service-detail">
+  <div class="container">
+    <div class="service-detail-grid">
+      <div class="service-visual" data-aos="fade-right">
+        <i class="fas fa-heart-pulse service-visual-icon"></i>
+        <div class="service-tag">Service 03</div>
+        <div class="service-visual-title">Life Skills Coaching</div>
+        <p class="service-visual-text">Building the human behind the professional — emotional intelligence, confidence, and authentic leadership.</p>
+      </div>
+      <div data-aos="fade-left">
+        <div class="section-tag no-lines">Life Skills Coaching</div>
+        <h2 class="section-title" style="margin-top:8px;">Develop the <span class="highlight">Whole Person</span></h2>
+        <div class="section-divider" style="margin:16px 0 20px;"></div>
+        <p style="color:var(--text-mid);line-height:1.8;margin-bottom:24px;">Technical skills open doors; life skills determine how far you go once inside. SGLD's Life Skills Coaching programmes equip graduates and professionals with the interpersonal, emotional, and leadership competencies that employers rank as their top priorities.</p>
+        <div class="service-features">
+          <div class="feature-item"><i class="fas fa-check-circle"></i><span>Emotional intelligence and self-awareness development</span></div>
+          <div class="feature-item"><i class="fas fa-check-circle"></i><span>Effective communication and public speaking</span></div>
+          <div class="feature-item"><i class="fas fa-check-circle"></i><span>Conflict resolution and negotiation skills</span></div>
+          <div class="feature-item"><i class="fas fa-check-circle"></i><span>Personal branding and professional presence</span></div>
+          <div class="feature-item"><i class="fas fa-check-circle"></i><span>Time management and productivity systems</span></div>
+          <div class="feature-item"><i class="fas fa-check-circle"></i><span>Mental resilience and wellbeing coaching</span></div>
+        </div>
+        <a href="contact.html" class="btn btn-primary" style="margin-top:28px;"><i class="fas fa-heart"></i> Book a Coaching Session</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Capacity Building & Delivery Modes -->
+<div id="capacity" class="service-detail">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <div class="section-tag no-lines">Service 04</div>
+      <h2 class="section-title" style="margin-top:8px;">Capacity Building <span class="highlight">Delivery Modes</span></h2>
+      <div class="section-divider"></div>
+      <p class="section-subtitle">Four flexible training delivery modes — each designed to fit your schedule, location, and learning preferences.</p>
+    </div>
+    <div class="delivery-modes" data-aos="fade-up" data-aos-delay="100">
+      <div class="mode-card">
+        <div class="mode-num">01</div>
+        <div class="mode-content">
+          <h4>Classroom Training</h4>
+          <p>Immersive face-to-face learning in our Harare training centre. Structured, facilitated sessions with peer interaction, group activities, and real-time expert guidance — ideal for intensive programmes and collaborative learning.</p>
+        </div>
+      </div>
+      <div class="mode-card">
+        <div class="mode-num">02</div>
+        <div class="mode-content">
+          <h4>Live Virtual Training</h4>
+          <p>Expert-led sessions delivered globally via secure, high-quality video conferencing platforms. Participate from anywhere in the world without sacrificing the interactivity and real-time feedback of a live classroom experience.</p>
+        </div>
+      </div>
+      <div class="mode-card">
+        <div class="mode-num">03</div>
+        <div class="mode-content">
+          <h4>Corporate Group Training</h4>
+          <p>Customised training delivered directly to your organisation's team — in your workplace or a venue of your choice. Programmes are tailored to your industry, team challenges, and specific learning objectives.</p>
+        </div>
+      </div>
+      <div class="mode-card">
+        <div class="mode-num">04</div>
+        <div class="mode-content">
+          <h4>Focused 1-to-1 Training</h4>
+          <p>Personalised, one-on-one coaching and mentorship sessions with an expert facilitator. Ideal for executives, professionals seeking targeted skill acceleration, or those requiring flexible scheduling around busy careers.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Consultancy -->
+<div id="consultancy" class="service-detail">
+  <div class="container">
+    <div class="service-detail-grid reverse">
+      <div class="service-visual" data-aos="fade-left">
+        <i class="fas fa-users-gear service-visual-icon"></i>
+        <div class="service-tag">Service 05</div>
+        <div class="service-visual-title">Human Capital Consultancy</div>
+        <p class="service-visual-text">Strategic workforce solutions aligned with your organisation's vision, culture, and growth ambitions.</p>
+      </div>
+      <div data-aos="fade-right">
+        <div class="section-tag no-lines">Human Capital Consultancy</div>
+        <h2 class="section-title" style="margin-top:8px;">Your People Are Your <span class="highlight">Greatest Asset</span></h2>
+        <div class="section-divider" style="margin:16px 0 20px;"></div>
+        <p style="color:var(--text-mid);line-height:1.8;margin-bottom:24px;">SGLD's Human Capital Consultancy arm partners with organisations to design, implement, and optimise people strategies that drive performance, retention, and competitive advantage. We bring strategic HR expertise with a deep understanding of the Zimbabwean and African business environment.</p>
+        <div class="service-features">
+          <div class="feature-item"><i class="fas fa-check-circle"></i><span>Organisational skills audits and workforce planning</span></div>
+          <div class="feature-item"><i class="fas fa-check-circle"></i><span>Training needs analysis and L&amp;D strategy design</span></div>
+          <div class="feature-item"><i class="fas fa-check-circle"></i><span>Talent acquisition and graduate placement support</span></div>
+          <div class="feature-item"><i class="fas fa-check-circle"></i><span>Performance management frameworks</span></div>
+          <div class="feature-item"><i class="fas fa-check-circle"></i><span>Succession planning and leadership pipeline development</span></div>
+          <div class="feature-item"><i class="fas fa-check-circle"></i><span>Change management and culture transformation</span></div>
+        </div>
+        <a href="corporate.html" class="btn btn-primary" style="margin-top:28px;"><i class="fas fa-chart-bar"></i> Request a Consultation</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Corporate Training -->
+<div id="corporate" class="service-detail">
+  <div class="container">
+    <div class="service-detail-grid">
+      <div class="service-visual" data-aos="fade-right">
+        <i class="fas fa-briefcase service-visual-icon"></i>
+        <div class="service-tag">Service 06</div>
+        <div class="service-visual-title">Corporate Training Solutions</div>
+        <p class="service-visual-text">Tailored, industry-led training that transforms teams and drives measurable business outcomes.</p>
+      </div>
+      <div data-aos="fade-left">
+        <div class="section-tag no-lines">Corporate Training Solutions</div>
+        <h2 class="section-title" style="margin-top:8px;">Training That <span class="highlight">Drives Results</span></h2>
+        <div class="section-divider" style="margin:16px 0 20px;"></div>
+        <p style="color:var(--text-mid);line-height:1.8;margin-bottom:24px;">SGLD delivers expert-led corporate training programmes that are fully customised to your organisation's industry, workforce, and strategic objectives. From single-day workshops to multi-month transformation programmes, our experienced facilitators bring real industry knowledge to every session.</p>
+        <div class="service-features">
+          <div class="feature-item"><i class="fas fa-check-circle"></i><span>Industry-experienced facilitators across all disciplines</span></div>
+          <div class="feature-item"><i class="fas fa-check-circle"></i><span>Fully customised curricula aligned to your objectives</span></div>
+          <div class="feature-item"><i class="fas fa-check-circle"></i><span>Delivered on-site, at SGLD, or via live virtual sessions</span></div>
+          <div class="feature-item"><i class="fas fa-check-circle"></i><span>Available in multiple languages including English, Chinese, German</span></div>
+          <div class="feature-item"><i class="fas fa-check-circle"></i><span>Pre and post-training assessment and impact reporting</span></div>
+          <div class="feature-item"><i class="fas fa-check-circle"></i><span>Group booking discounts for teams of 5 or more</span></div>
+        </div>
+        <a href="corporate.html" class="btn btn-primary" style="margin-top:28px;"><i class="fas fa-handshake"></i> Get a Custom Quote</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Specialisations -->
+<section class="section bg-off-white">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <div class="section-tag">Expert Disciplines</div>
+      <h2 class="section-title">Our <span class="highlight">Specialisation Areas</span></h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="spec-grid">
+      <div class="service-card" data-aos="fade-up" data-aos-delay="0"><div class="service-card-icon"><i class="fas fa-laptop-code"></i></div><h3 style="font-size:1rem;">IT Skills &amp; Digital</h3><p style="font-size:0.82rem;">Software, networking, cybersecurity, cloud computing, and digital transformation for modern organisations.</p></div>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="60"><div class="service-card-icon"><i class="fas fa-robot"></i></div><h3 style="font-size:1rem;">AI &amp; Machine Learning</h3><p style="font-size:0.82rem;">Practical AI/ML skills including data science, automation, and intelligent systems for business professionals.</p></div>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="120"><div class="service-card-icon"><i class="fas fa-language"></i></div><h3 style="font-size:1rem;">Foreign Languages</h3><p style="font-size:0.82rem;">IELTS exam preparation, Mandarin Chinese, German, and business communication for international careers.</p></div>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="180"><div class="service-card-icon"><i class="fas fa-calculator"></i></div><h3 style="font-size:1rem;">Accounting &amp; Finance</h3><p style="font-size:0.82rem;">ACCA, CIMA, financial skills, management accounting, and corporate finance for finance professionals.</p></div>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="0"><div class="service-card-icon"><i class="fas fa-chess"></i></div><h3 style="font-size:1rem;">Strategic Planning</h3><p style="font-size:0.82rem;">Business strategy, competitive intelligence, balanced scorecard, and scenario planning methodologies.</p></div>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="60"><div class="service-card-icon"><i class="fas fa-sitemap"></i></div><h3 style="font-size:1rem;">Corporate Management</h3><p style="font-size:0.82rem;">Executive leadership, governance, project management (PMP), and organisational behaviour programmes.</p></div>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="120"><div class="service-card-icon"><i class="fas fa-leaf"></i></div><h3 style="font-size:1rem;">SHE &amp; ISO Standards</h3><p style="font-size:0.82rem;">Safety, Health &amp; Environment training and international standardisation compliance for regulated industries.</p></div>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="180"><div class="service-card-icon"><i class="fas fa-rocket"></i></div><h3 style="font-size:1rem;">Entrepreneurship</h3><p style="font-size:0.82rem;">Startup development, lean business modelling, venture financing, and entrepreneurial leadership coaching.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Parallax Quote -->
+<div class="parallax-quote">
+  <div class="container">
+    <blockquote data-aos="fade-up">"The illiterate of the 21st century will not be those who cannot read and write, but those who cannot learn, unlearn, and relearn."</blockquote>
+    <cite data-aos="fade-up" data-aos-delay="100">— Alvin Toffler &nbsp;|&nbsp; The Philosophy Behind Every SGLD Programme</cite>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="cta-banner">
+  <div class="container" data-aos="fade-up">
+    <h2>Not Sure Which <span>Service</span> Is Right For You?</h2>
+    <p>Our team is happy to assess your needs and recommend the most suitable programme or solution for you or your organisation.</p>
+    <div class="cta-banner-btns">
+      <a href="contact.html" class="btn btn-primary btn-lg"><i class="fas fa-comments"></i> Talk to an Advisor</a>
+      <a href="programmes.html" class="btn btn-outline btn-lg"><i class="fas fa-graduation-cap"></i> Browse Programmes</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div><div class="footer-brand-logo"><img src="assets/images/logo.png" alt="SGLD" /><div><div class="footer-brand-name">School of Graduate<br>Leadership Development</div><div class="footer-brand-motto">Inspire · Succeed</div></div></div><p class="footer-about">A specialist post-graduate professional development institution bridging academia and industry since 2023.</p><div class="footer-socials"><a href="#" class="footer-social"><i class="fab fa-facebook-f"></i></a><a href="#" class="footer-social"><i class="fab fa-twitter"></i></a><a href="#" class="footer-social"><i class="fab fa-linkedin-in"></i></a><a href="https://wa.me/263773208002" class="footer-social"><i class="fab fa-whatsapp"></i></a></div></div>
+      <div><h4 class="footer-heading">Quick Links</h4><div class="footer-links"><a href="index.html">Home</a><a href="about.html">About SGLD</a><a href="services.html">Our Services</a><a href="programmes.html">Programmes</a><a href="corporate.html">Corporate</a><a href="impact.html">Our Impact</a><a href="blog.html">Blog</a><a href="contact.html">Contact Us</a></div></div>
+      <div><h4 class="footer-heading">Services</h4><div class="footer-links"><a href="#research">Research &amp; Dev</a><a href="#incubation">Business Incubation</a><a href="#lifeskills">Life Skills</a><a href="#capacity">Capacity Building</a><a href="#consultancy">HR Consultancy</a><a href="#corporate">Corporate Training</a></div></div>
+      <div><h4 class="footer-heading">Contact</h4><div class="footer-contact-item"><i class="fas fa-location-dot"></i><span>54 Le Rouxe Drive, Hillside, Harare</span></div><div class="footer-contact-item"><i class="fas fa-phone"></i><a href="tel:+263773208002" style="color:inherit;">+263 773 208 002</a></div><div class="footer-contact-item"><i class="fas fa-envelope"></i><a href="mailto:info@graduateleader.co.zw" style="color:inherit;">info@graduateleader.co.zw</a></div></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2024 School of Graduate Leadership Development. All rights reserved.</p><div class="footer-dev">Powered with ❤️ by <a href="https://blaxium.com" target="_blank" rel="noopener">Blaxium</a></div></div>
+  </div>
+</footer>
+
+<a href="https://wa.me/263773208002" id="whatsapp-btn" target="_blank" rel="noopener" aria-label="WhatsApp"><div class="whatsapp-pulse"></div><i class="fab fa-whatsapp"></i></a>
+<button id="scroll-top-btn" aria-label="Scroll to top"><i class="fas fa-arrow-up"></i></button>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog &amp; Insights | School of Graduate Leadership Development</title>
+  <meta name="description" content="Leadership insights, graduate development tips, industry trends and thought leadership from the SGLD team." />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Blog","name":"SGLD Insights","url":"https://graduateleader.co.zw/blog.html","description":"Leadership and graduate development insights from SGLD Zimbabwe"}</script>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+  <style>
+    .blog-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+    @media(max-width:1024px){ .blog-grid{grid-template-columns:repeat(2,1fr);} }
+    @media(max-width:640px){ .blog-grid{grid-template-columns:1fr;} }
+    .featured-post { display:grid; grid-template-columns:1fr 1fr; gap:0; background:var(--white); border-radius:var(--radius-xl); overflow:hidden; box-shadow:var(--shadow); margin-bottom:64px; }
+    @media(max-width:768px){ .featured-post{grid-template-columns:1fr;} }
+    .featured-img { background:linear-gradient(135deg,var(--navy-dark),var(--navy)); min-height:320px; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
+    .featured-img-icon { font-size:5rem; color:rgba(245,166,35,0.25); }
+    .featured-img-badge { position:absolute; top:20px; left:20px; }
+    .featured-body { padding:40px; display:flex; flex-direction:column; justify-content:center; }
+    .featured-meta { display:flex; align-items:center; gap:16px; font-size:0.78rem; color:var(--text-muted); margin-bottom:12px; }
+    .featured-title { font-family:var(--font-display); font-size:1.8rem; font-weight:700; color:var(--text-dark); line-height:1.25; margin-bottom:12px; }
+    .featured-title a:hover { color:var(--navy); }
+    .featured-excerpt { font-size:0.92rem; color:var(--text-muted); line-height:1.75; margin-bottom:20px; }
+    .newsletter-box { background:linear-gradient(135deg,var(--navy),var(--navy-dark)); border-radius:var(--radius-xl); padding:40px; display:flex; align-items:center; gap:32px; margin-top:64px; }
+    @media(max-width:768px){ .newsletter-box{flex-direction:column;text-align:center;} }
+    .newsletter-form { display:flex; gap:8px; flex:1; }
+    @media(max-width:480px){ .newsletter-form{flex-direction:column;} }
+    .newsletter-form input { flex:1; padding:12px 16px; border-radius:var(--radius); border:none; font-family:var(--font-body); font-size:0.9rem; outline:none; }
+    .sidebar { display:flex; flex-direction:column; gap:24px; }
+    .sidebar-widget { background:var(--white); border-radius:var(--radius-lg); padding:24px; box-shadow:var(--shadow-sm); border:1px solid rgba(0,0,0,0.06); }
+    .sidebar-title { font-weight:700; font-size:0.82rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--navy); margin-bottom:16px; padding-bottom:10px; border-bottom:2px solid var(--gold); display:inline-block; }
+    .recent-post { display:flex; gap:12px; align-items:flex-start; margin-bottom:14px; padding-bottom:14px; border-bottom:1px solid rgba(0,0,0,0.06); }
+    .recent-post:last-child { margin-bottom:0; padding-bottom:0; border-bottom:none; }
+    .recent-post-thumb { width:56px; height:56px; border-radius:var(--radius); background:linear-gradient(135deg,var(--navy),var(--navy-dark)); flex-shrink:0; display:flex; align-items:center; justify-content:center; color:var(--gold); font-size:18px; }
+    .recent-post-title { font-size:0.83rem; font-weight:600; color:var(--text-dark); line-height:1.4; margin-bottom:4px; }
+    .recent-post-title a:hover { color:var(--navy); }
+    .recent-post-date { font-size:0.72rem; color:var(--text-muted); }
+    .tag-cloud { display:flex; flex-wrap:wrap; gap:8px; }
+    .tag { padding:6px 12px; background:var(--off-white); border-radius:100px; font-size:0.75rem; font-weight:600; color:var(--text-muted); transition:var(--transition); cursor:pointer; }
+    .tag:hover { background:var(--navy); color:var(--white); }
+    .search-box { display:flex; gap:8px; }
+    .search-box input { flex:1; padding:10px 14px; border:1.5px solid #E2E8F0; border-radius:var(--radius); font-family:var(--font-body); font-size:0.88rem; outline:none; transition:var(--transition); }
+    .search-box input:focus { border-color:var(--navy); }
+    .search-box button { width:40px; height:40px; background:var(--navy); border-radius:var(--radius); color:white; border:none; cursor:pointer; flex-shrink:0; transition:var(--transition); }
+    .search-box button:hover { background:var(--gold); }
+  </style>
+</head>
+<body>
+<div id="scroll-progress"></div>
+<div id="cursor"></div>
+<div id="cursor-follower"></div>
+<div id="preloader"><img src="assets/images/logo.png" alt="SGLD" class="preloader-logo" /><div class="preloader-bar"><div class="preloader-bar-inner"></div></div></div>
+<div id="cookie-banner"><p>We use cookies to improve your experience. <a href="#">Privacy Policy</a>.</p><div class="cookie-btns"><button class="btn btn-outline btn-sm" id="decline-cookies">Decline</button><button class="btn btn-primary btn-sm" id="accept-cookies">Accept</button></div></div>
+<div id="motion-toggle"><i class="fas fa-wind"></i><span>Reduce Motion</span></div>
+
+<nav id="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo"><img src="assets/images/logo.png" alt="SGLD Logo" /><div class="nav-logo-text"><span class="brand-name">Graduate Leadership</span><span class="brand-motto">Inspire · Succeed</span></div></a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a><a href="about.html" class="nav-link">About</a>
+      <div class="nav-dropdown"><a href="services.html" class="nav-link">Services <i class="fas fa-chevron-down" style="font-size:9px;margin-left:3px;"></i></a><div class="nav-dropdown-menu"><a href="services.html#research">Research &amp; Development</a><a href="services.html#incubation">Business Incubation</a><a href="services.html#lifeskills">Life Skills Coaching</a><a href="services.html#capacity">Capacity Building</a><a href="services.html#corporate">Corporate Training</a><a href="services.html#consultancy">Human Capital Consultancy</a></div></div>
+      <a href="programmes.html" class="nav-link">Programmes</a><a href="corporate.html" class="nav-link">Corporate</a><a href="impact.html" class="nav-link">Impact</a>
+      <a href="blog.html" class="nav-link active">Blog</a><a href="contact.html" class="nav-link">Contact</a>
+      <a href="contact.html#enrol" class="nav-link nav-cta">Enrol Now</a>
+    </div>
+    <button class="nav-toggle"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav-mobile"><a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a href="programmes.html">Programmes</a><a href="corporate.html">Corporate</a><a href="impact.html">Impact</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a><a href="contact.html#enrol" class="mobile-cta">Enrol Now</a></div>
+
+<section class="page-hero">
+  <div class="container page-hero-content">
+    <div class="page-breadcrumb"><a href="index.html">Home</a><i class="fas fa-chevron-right"></i><span>Blog &amp; Insights</span></div>
+    <h1 class="page-hero-title">Blog &amp; <span>Insights</span></h1>
+    <p class="page-hero-sub">Thought leadership, industry trends, and practical advice for graduates and professionals.</p>
+  </div>
+</section>
+
+<section class="section bg-off-white">
+  <div class="container">
+
+    <!-- Featured Post -->
+    <div data-aos="fade-up">
+      <div class="section-tag" style="margin-bottom:20px;">Featured Article</div>
+      <div class="featured-post">
+        <div class="featured-img">
+          <i class="fas fa-graduation-cap featured-img-icon"></i>
+          <div class="featured-img-badge"><span class="badge badge-gold">Featured</span></div>
+        </div>
+        <div class="featured-body">
+          <div class="featured-meta">
+            <span class="badge badge-navy">Leadership</span>
+            <span><i class="fas fa-clock" style="margin-right:4px;"></i> 8 min read</span>
+            <span>Dec 12, 2024</span>
+          </div>
+          <h2 class="featured-title"><a href="#">The Graduate Employment Crisis in Zimbabwe: Causes, Consequences, and How Skills Development Is The Solution</a></h2>
+          <p class="featured-excerpt">Zimbabwe produces thousands of university graduates annually, yet unemployment rates among this group remain stubbornly high. This article examines the structural causes of the graduate employment gap, the economic consequences of unaddressed skills mismatches, and how targeted post-graduate development programmes are creating real pathways to employment...</p>
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+            <div style="display:flex;align-items:center;gap:10px;"><div style="width:36px;height:36px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:14px;font-weight:700;">ED</div><div><div style="font-size:0.83rem;font-weight:600;">SGLD Editorial Team</div><div style="font-size:0.72rem;color:var(--text-muted);">School of Graduate Leadership Development</div></div></div>
+            <a href="#" class="blog-read-more">Read Full Article <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category Filter -->
+    <div class="filter-bar" data-aos="fade-up">
+      <button class="filter-btn active" data-filter="all" data-filter-group="blog">All Articles</button>
+      <button class="filter-btn" data-filter="leadership" data-filter-group="blog">Leadership</button>
+      <button class="filter-btn" data-filter="graduate" data-filter-group="blog">Graduate Dev</button>
+      <button class="filter-btn" data-filter="industry" data-filter-group="blog">Industry Trends</button>
+      <button class="filter-btn" data-filter="business" data-filter-group="blog">Business</button>
+      <button class="filter-btn" data-filter="technology" data-filter-group="blog">Technology</button>
+    </div>
+
+    <!-- Blog Grid + Sidebar -->
+    <div style="display:grid;grid-template-columns:1fr 320px;gap:48px;align-items:start;">
+      <div>
+        <div class="blog-grid" data-filter-group-items="blog">
+
+          <div class="blog-card" data-category="leadership" data-aos="fade-up" data-aos-delay="0">
+            <div class="blog-card-img"><i class="fas fa-users-gear blog-card-img-icon"></i><div class="blog-card-cat"><span class="badge badge-gold">Leadership</span></div></div>
+            <div class="blog-card-body">
+              <div class="blog-card-meta"><span>Nov 28, 2024</span><span><i class="fas fa-clock" style="margin-right:4px;"></i>6 min</span></div>
+              <h3 class="blog-card-title"><a href="#">5 Leadership Traits Every Modern Manager Needs in 2025</a></h3>
+              <p class="blog-card-excerpt">The workplace is evolving faster than ever. We break down the five non-negotiable leadership competencies that separate effective managers from great leaders in today's dynamic business environment.</p>
+              <a href="#" class="blog-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <div class="blog-card" data-category="graduate" data-aos="fade-up" data-aos-delay="80">
+            <div class="blog-card-img"><i class="fas fa-graduation-cap blog-card-img-icon"></i><div class="blog-card-cat"><span class="badge badge-navy">Graduate Dev</span></div></div>
+            <div class="blog-card-body">
+              <div class="blog-card-meta"><span>Nov 15, 2024</span><span><i class="fas fa-clock" style="margin-right:4px;"></i>5 min</span></div>
+              <h3 class="blog-card-title"><a href="#">How to Stand Out in Zimbabwe's Competitive Job Market</a></h3>
+              <p class="blog-card-excerpt">With more graduates than ever entering the workforce, differentiation is everything. Here are seven proven strategies to make your application, interview, and professional profile impossible to ignore.</p>
+              <a href="#" class="blog-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <div class="blog-card" data-category="technology" data-aos="fade-up" data-aos-delay="160">
+            <div class="blog-card-img"><i class="fas fa-robot blog-card-img-icon"></i><div class="blog-card-cat"><span class="badge badge-green">Technology</span></div></div>
+            <div class="blog-card-body">
+              <div class="blog-card-meta"><span>Nov 05, 2024</span><span><i class="fas fa-clock" style="margin-right:4px;"></i>7 min</span></div>
+              <h3 class="blog-card-title"><a href="#">AI in the Workplace: What Every African Professional Needs to Know</a></h3>
+              <p class="blog-card-excerpt">Artificial intelligence is reshaping industries across Africa. This guide breaks down what AI means for your career, which skills will remain irreplaceable, and how to position yourself for the AI-driven economy.</p>
+              <a href="#" class="blog-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <div class="blog-card" data-category="business" data-aos="fade-up" data-aos-delay="0">
+            <div class="blog-card-img"><i class="fas fa-lightbulb blog-card-img-icon"></i><div class="blog-card-cat"><span class="badge badge-gold">Business</span></div></div>
+            <div class="blog-card-body">
+              <div class="blog-card-meta"><span>Oct 22, 2024</span><span><i class="fas fa-clock" style="margin-right:4px;"></i>9 min</span></div>
+              <h3 class="blog-card-title"><a href="#">Building a Startup in Zimbabwe: The Opportunities Nobody Is Talking About</a></h3>
+              <p class="blog-card-excerpt">Despite economic challenges, Zimbabwe holds enormous untapped entrepreneurial potential. We explore the most promising sectors, funding options, and the support ecosystem available for first-time founders.</p>
+              <a href="#" class="blog-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <div class="blog-card" data-category="industry" data-aos="fade-up" data-aos-delay="80">
+            <div class="blog-card-img"><i class="fas fa-chart-line blog-card-img-icon"></i><div class="blog-card-cat"><span class="badge badge-navy">Industry Trends</span></div></div>
+            <div class="blog-card-body">
+              <div class="blog-card-meta"><span>Oct 10, 2024</span><span><i class="fas fa-clock" style="margin-right:4px;"></i>6 min</span></div>
+              <h3 class="blog-card-title"><a href="#">The Top 10 In-Demand Skills Employers Are Hiring For in Zimbabwe (2024–2025)</a></h3>
+              <p class="blog-card-excerpt">Based on our analysis of over 200 job listings and consultations with 40+ hiring managers, here are the exact skills that will determine your employability over the next two years.</p>
+              <a href="#" class="blog-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <div class="blog-card" data-category="graduate" data-aos="fade-up" data-aos-delay="160">
+            <div class="blog-card-img"><i class="fas fa-heart-pulse blog-card-img-icon"></i><div class="blog-card-cat"><span class="badge badge-green">Life Skills</span></div></div>
+            <div class="blog-card-body">
+              <div class="blog-card-meta"><span>Sep 28, 2024</span><span><i class="fas fa-clock" style="margin-right:4px;"></i>4 min</span></div>
+              <h3 class="blog-card-title"><a href="#">Why Emotional Intelligence Is Now Your Most Valuable Professional Skill</a></h3>
+              <p class="blog-card-excerpt">Research consistently shows that emotional intelligence — not technical ability — is the strongest predictor of professional success and leadership effectiveness. Here's what that means for your development.</p>
+              <a href="#" class="blog-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <div class="blog-card" data-category="leadership" data-aos="fade-up" data-aos-delay="0">
+            <div class="blog-card-img"><i class="fas fa-handshake blog-card-img-icon"></i><div class="blog-card-cat"><span class="badge badge-gold">Leadership</span></div></div>
+            <div class="blog-card-body">
+              <div class="blog-card-meta"><span>Sep 15, 2024</span><span><i class="fas fa-clock" style="margin-right:4px;"></i>5 min</span></div>
+              <h3 class="blog-card-title"><a href="#">How to Build a Professional Network That Actually Opens Doors</a></h3>
+              <p class="blog-card-excerpt">Networking done right is one of the most powerful career accelerators available. We share the exact strategies that SGLD graduates use to build genuine professional relationships that create real opportunities.</p>
+              <a href="#" class="blog-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <div class="blog-card" data-category="industry" data-aos="fade-up" data-aos-delay="80">
+            <div class="blog-card-img"><i class="fas fa-globe-africa blog-card-img-icon"></i><div class="blog-card-cat"><span class="badge badge-navy">Industry</span></div></div>
+            <div class="blog-card-body">
+              <div class="blog-card-meta"><span>Sep 02, 2024</span><span><i class="fas fa-clock" style="margin-right:4px;"></i>8 min</span></div>
+              <h3 class="blog-card-title"><a href="#">The Future of Work in Africa: How Organisations Must Adapt to Survive</a></h3>
+              <p class="blog-card-excerpt">Remote work, digital transformation, the skills gap, and Gen Z's evolving expectations are all converging to reshape African workplaces. Here's what forward-thinking organisations are doing differently.</p>
+              <a href="#" class="blog-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <div class="blog-card" data-category="business" data-aos="fade-up" data-aos-delay="160">
+            <div class="blog-card-img"><i class="fas fa-coins blog-card-img-icon"></i><div class="blog-card-cat"><span class="badge badge-gold">Business</span></div></div>
+            <div class="blog-card-body">
+              <div class="blog-card-meta"><span>Aug 20, 2024</span><span><i class="fas fa-clock" style="margin-right:4px;"></i>6 min</span></div>
+              <h3 class="blog-card-title"><a href="#">ACCA vs CIMA: Which Accounting Qualification Is Right for Your Career?</a></h3>
+              <p class="blog-card-excerpt">Both qualifications open doors — but they lead to different rooms. This in-depth comparison helps accounting and finance professionals in Zimbabwe choose the path that best aligns with their career ambitions.</p>
+              <a href="#" class="blog-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Newsletter -->
+        <div class="newsletter-box" data-aos="fade-up">
+          <div style="flex:1;">
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">Stay Informed</div>
+            <h3 style="font-family:var(--font-display);font-size:1.6rem;font-weight:700;color:var(--white);margin-bottom:8px;">Get Insights Delivered to Your Inbox</h3>
+            <p style="color:rgba(255,255,255,0.65);font-size:0.88rem;">Join 1,000+ professionals receiving SGLD's weekly insights on leadership, graduate development, and industry trends.</p>
+          </div>
+          <div style="flex:1;">
+            <form class="newsletter-form">
+              <input type="email" placeholder="Enter your email address" required />
+              <button type="submit" class="btn btn-primary" style="white-space:nowrap;"><i class="fas fa-paper-plane"></i> Subscribe</button>
+            </form>
+            <p style="font-size:0.72rem;color:rgba(255,255,255,0.4);margin-top:8px;">No spam, ever. Unsubscribe at any time.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar" data-aos="fade-left">
+        <div class="sidebar-widget">
+          <div class="sidebar-title">Search Articles</div>
+          <div class="search-box">
+            <input type="text" placeholder="Search insights..." />
+            <button><i class="fas fa-search"></i></button>
+          </div>
+        </div>
+
+        <div class="sidebar-widget">
+          <div class="sidebar-title">Recent Posts</div>
+          <div class="recent-post"><div class="recent-post-thumb"><i class="fas fa-users-gear"></i></div><div><div class="recent-post-title"><a href="#">5 Leadership Traits Every Modern Manager Needs in 2025</a></div><div class="recent-post-date">Nov 28, 2024</div></div></div>
+          <div class="recent-post"><div class="recent-post-thumb"><i class="fas fa-graduation-cap"></i></div><div><div class="recent-post-title"><a href="#">How to Stand Out in Zimbabwe's Competitive Job Market</a></div><div class="recent-post-date">Nov 15, 2024</div></div></div>
+          <div class="recent-post"><div class="recent-post-thumb"><i class="fas fa-robot"></i></div><div><div class="recent-post-title"><a href="#">AI in the Workplace: What Every African Professional Needs to Know</a></div><div class="recent-post-date">Nov 05, 2024</div></div></div>
+          <div class="recent-post"><div class="recent-post-thumb"><i class="fas fa-lightbulb"></i></div><div><div class="recent-post-title"><a href="#">Building a Startup in Zimbabwe: Opportunities Nobody Is Talking About</a></div><div class="recent-post-date">Oct 22, 2024</div></div></div>
+        </div>
+
+        <div class="sidebar-widget">
+          <div class="sidebar-title">Categories</div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.06);font-size:0.87rem;"><span>Leadership</span><span class="badge badge-navy">12</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.06);font-size:0.87rem;"><span>Graduate Development</span><span class="badge badge-navy">9</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.06);font-size:0.87rem;"><span>Industry Trends</span><span class="badge badge-navy">7</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.06);font-size:0.87rem;"><span>Business</span><span class="badge badge-navy">8</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;font-size:0.87rem;"><span>Technology</span><span class="badge badge-navy">5</span></div>
+          </div>
+        </div>
+
+        <div class="sidebar-widget">
+          <div class="sidebar-title">Popular Tags</div>
+          <div class="tag-cloud">
+            <span class="tag">Leadership</span><span class="tag">Graduate Jobs</span><span class="tag">Zimbabwe</span><span class="tag">ACCA</span><span class="tag">AI Skills</span><span class="tag">Entrepreneurship</span><span class="tag">IELTS</span><span class="tag">Career Growth</span><span class="tag">Corporate Training</span><span class="tag">Life Skills</span><span class="tag">EQ</span>
+          </div>
+        </div>
+
+        <div style="background:var(--navy);border-radius:var(--radius-lg);padding:24px;text-align:center;">
+          <img src="assets/images/logo.png" alt="SGLD" style="width:60px;margin:0 auto 12px;" />
+          <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--white);margin-bottom:8px;">Ready to Grow?</div>
+          <p style="font-size:0.82rem;color:rgba(255,255,255,0.65);line-height:1.6;margin-bottom:16px;">Explore our programmes and start your leadership journey today.</p>
+          <a href="programmes.html" class="btn btn-primary w-full" style="justify-content:center;font-size:0.82rem;">Browse Programmes</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-banner">
+  <div class="container" data-aos="fade-up">
+    <h2>Want to <span>Contribute</span> an Article?</h2>
+    <p>We welcome thought leadership contributions from industry professionals, academics, and SGLD alumni. Share your insights with our growing community.</p>
+    <div class="cta-banner-btns"><a href="contact.html" class="btn btn-primary btn-lg"><i class="fas fa-pen"></i> Submit an Article</a><a href="programmes.html" class="btn btn-outline btn-lg"><i class="fas fa-graduation-cap"></i> Our Programmes</a></div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div><div class="footer-brand-logo"><img src="assets/images/logo.png" alt="SGLD" /><div><div class="footer-brand-name">School of Graduate<br>Leadership Development</div><div class="footer-brand-motto">Inspire · Succeed</div></div></div><p class="footer-about">Bridging academia and industry since 2023. For Today. For Tomorrow.</p><div class="footer-socials"><a href="#" class="footer-social"><i class="fab fa-facebook-f"></i></a><a href="#" class="footer-social"><i class="fab fa-linkedin-in"></i></a><a href="https://wa.me/263773208002" class="footer-social"><i class="fab fa-whatsapp"></i></a></div></div>
+      <div><h4 class="footer-heading">Quick Links</h4><div class="footer-links"><a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a href="programmes.html">Programmes</a><a href="corporate.html">Corporate</a><a href="impact.html">Impact</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a></div></div>
+      <div><h4 class="footer-heading">Blog Categories</h4><div class="footer-links"><a href="#">Leadership</a><a href="#">Graduate Development</a><a href="#">Industry Trends</a><a href="#">Business &amp; Finance</a><a href="#">Technology</a><a href="#">Life Skills</a></div></div>
+      <div><h4 class="footer-heading">Contact</h4><div class="footer-contact-item"><i class="fas fa-location-dot"></i><span>54 Le Rouxe Drive, Hillside, Harare</span></div><div class="footer-contact-item"><i class="fas fa-phone"></i><a href="tel:+263773208002" style="color:inherit;">+263 773 208 002</a></div><div class="footer-contact-item"><i class="fas fa-envelope"></i><a href="mailto:info@graduateleader.co.zw" style="color:inherit;">info@graduateleader.co.zw</a></div></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2024 School of Graduate Leadership Development. All rights reserved.</p><div class="footer-dev">Powered with ❤️ by <a href="https://blaxium.com" target="_blank" rel="noopener">Blaxium</a></div></div>
+  </div>
+</footer>
+
+<a href="https://wa.me/263773208002" id="whatsapp-btn" target="_blank" rel="noopener" aria-label="WhatsApp"><div class="whatsapp-pulse"></div><i class="fab fa-whatsapp"></i></a>
+<button id="scroll-top-btn" aria-label="Scroll to top"><i class="fas fa-arrow-up"></i></button>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="assets/js/main.js"></script>
+<style>@media(max-width:1024px){[style*="grid-template-columns:1fr 320px"]{grid-template-columns:1fr !important;} .sidebar{flex-direction:row;flex-wrap:wrap;} .sidebar-widget{flex:1;min-width:280px;}}</style>
+</body>
+</html>
