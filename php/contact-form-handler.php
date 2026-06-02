@@ -4,6 +4,21 @@
    Handles General, Enrolment, and Corporate enquiry forms
    ======================================== */
 
+// Enable error logging for debugging
+error_reporting(E_ALL);
+ini_set('display_errors', 0); // Don't display errors to users
+ini_set('log_errors', 1);
+ini_set('error_log', __DIR__ . '/contact-form-errors.log');
+
+// Log function
+function logDebug($message) {
+    $timestamp = date('Y-m-d H:i:s');
+    $logMessage = "[{$timestamp}] {$message}\n";
+    error_log($logMessage, 3, __DIR__ . '/contact-form-debug.log');
+}
+
+logDebug("=== Form submission started ===");
+
 // Set headers for JSON response
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
@@ -43,6 +58,7 @@ function isSpam($text, $spamKeywords) {
 
 // Only accept POST requests
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    logDebug("ERROR: Invalid request method: " . $_SERVER['REQUEST_METHOD']);
     $response['message'] = 'Invalid request method.';
     echo json_encode($response);
     exit;
@@ -50,6 +66,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 // Get form type
 $formType = isset($_POST['form_type']) ? $_POST['form_type'] : 'general';
+logDebug("Form type detected: {$formType}");
+logDebug("POST data: " . json_encode($_POST));
 
 // Get honeypot field based on form type
 $honeypotFieldName = 'website';
@@ -58,6 +76,7 @@ if ($formType === 'corporate') $honeypotFieldName = 'website3';
 
 // Honeypot check - if filled, it's a bot
 if (!empty($_POST[$honeypotFieldName])) {
+    logDebug("SPAM BLOCKED: Honeypot field '{$honeypotFieldName}' was filled");
     $response['success'] = true;
     $response['message'] = 'Thank you for your message. We will be in touch soon.';
     echo json_encode($response);
@@ -392,15 +411,31 @@ $headers = [
     'X-Mailer: PHP/' . phpversion()
 ];
 
+// Log email details before sending
+logDebug("Preparing to send email:");
+logDebug("  To: " . RECIPIENT_EMAIL);
+logDebug("  Subject: {$emailSubject}");
+logDebug("  From: " . FROM_EMAIL);
+logDebug("  Reply-To: {$email}");
+logDebug("  Headers: " . implode(" | ", $headers));
+
 // Send email
 $mail_sent = mail(RECIPIENT_EMAIL, $emailSubject, $emailBody, implode("\r\n", $headers));
 
+// Log the result
+logDebug("mail() function returned: " . ($mail_sent ? 'TRUE (success)' : 'FALSE (failed)'));
+logDebug("PHP mail function exists: " . (function_exists('mail') ? 'YES' : 'NO'));
+
 if ($mail_sent) {
+    logDebug("SUCCESS: Email sent successfully");
     $response['success'] = true;
     $response['message'] = 'Thank you for contacting SGLD. We will respond within one business day.';
 } else {
+    logDebug("ERROR: mail() returned false - email not sent");
     $response['message'] = 'Sorry, there was an error sending your message. Please try again or contact us directly via phone or WhatsApp.';
 }
+
+logDebug("=== Form submission ended ===\n");
 
 echo json_encode($response);
 exit;
